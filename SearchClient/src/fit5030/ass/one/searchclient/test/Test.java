@@ -1,6 +1,6 @@
 package fit5030.ass.one.searchclient.test;
 
-import fit5030.ass.one.searchclient.web.yahoo.YahooSearchEngine;
+import fit5030.ass.one.searchclient.web.yahoo.YahooWebSearchEngine;
 import fit5030.ass.one.searchclient.web.yahoo.YahooWebSearchQuery;
 
 public class Test {
@@ -10,10 +10,11 @@ public class Test {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		YahooSearchEngine se = new YahooSearchEngine();
+		YahooWebSearchEngine se = new YahooWebSearchEngine();
 		YahooWebSearchQuery query = new YahooWebSearchQuery();
-		query.setQuery("monash&nbsp;student");
-		se.search(query.toString());
+		query.setQueryInput("monash&nbsp;student");
+		System.out.println(se.search(query));
+		System.out.println(query);
 	}
 
 }

@@ -42,4 +42,10 @@ public class WebSearchResultEntry implements ISearchResultEntry {
 		this.title = title;
 	}
 
+	public String toString() {
+		String result = "<td>" + this.getTitle() + "</td>";
+		result = "<td><a href='" + this.getUrl() + "'>" + this.getSummary()
+				+ "</a></td>";
+		return result;
+	}
 }

@@ -4,6 +4,19 @@ import java.util.*;
 
 public class SearchResultList<T extends ISearchResultEntry> implements
 		Iterable<T> {
+
+	protected int pageSize = 1;
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	protected int pageNumber = -1;
+
 	public int getPageNumber() {
 		return pageNumber;
 	}
@@ -12,11 +25,23 @@ public class SearchResultList<T extends ISearchResultEntry> implements
 		this.pageNumber = pageNumber;
 	}
 
-	protected int pageNumber = -1;
 	protected List<T> resultList = new LinkedList<T>();
 
 	@Override
 	public Iterator<T> iterator() {
 		return this.resultList.iterator();
+	}
+
+	public void add(T entry) {
+		this.resultList.add(entry);
+	}
+
+	public String toString() {
+		String result = "<table class='websearch'>";
+		for (ISearchResultEntry entry : this) {
+			result += "<tr>" + entry.toString() + "</tr>";
+		}
+		result += "</table>";
+		return result;
 	}
 }

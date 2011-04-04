@@ -1,8 +1,7 @@
 package fit5030.ass.one.searchclient.test;
 
-import fit5030.ass.one.searchclient.base.*;
-import fit5030.ass.one.searchclient.web.YahooSearchEngine;
-import fit5030.ass.one.searchclient.web.YahooWebSearchQuery;
+import fit5030.ass.one.searchclient.web.yahoo.YahooSearchEngine;
+import fit5030.ass.one.searchclient.web.yahoo.YahooWebSearchQuery;
 
 public class Test {
 

@@ -1,4 +1,4 @@
-package fit5030.assignement.one.searchclient;
+package fit5030.ass.one.searchclient.web;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -13,10 +13,12 @@ import javax.xml.parsers.*;
 import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.methods.*;
 
+import fit5030.ass.one.searchclient.base.AbstractSearchEngine;
+
 public class YahooSearchEngine extends AbstractSearchEngine {
 
 	@Override
-	public List<WebSearchResult> search(String request) {
+	public List<WebSearchResultEntry> search(String request) {
 		// TODO Auto-generated method stub
 		try {
 
@@ -42,7 +44,7 @@ public class YahooSearchEngine extends AbstractSearchEngine {
 			 * br.close();
 			 */
 
-			List<WebSearchResult> list = new Vector<WebSearchResult>();
+			List<WebSearchResultEntry> list = new Vector<WebSearchResultEntry>();
 
 			DocumentBuilderFactory factory = DocumentBuilderFactory
 					.newInstance();
@@ -62,7 +64,7 @@ public class YahooSearchEngine extends AbstractSearchEngine {
 				 * + doc.getElementsByTagName("date").item(i)
 				 * .getFirstChild().getNodeValue());
 				 */
-				WebSearchResult result = new WebSearchResult();
+				WebSearchResultEntry result = new WebSearchResultEntry();
 				result.setTitle(doc.getElementsByTagName("title").item(i)
 						.getFirstChild().getNodeValue());
 				result.setSummary(doc.getElementsByTagName("abstract").item(i)

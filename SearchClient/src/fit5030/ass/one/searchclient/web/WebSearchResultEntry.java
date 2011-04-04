@@ -1,8 +1,10 @@
-package fit5030.assignement.one.searchclient;
+package fit5030.ass.one.searchclient.web;
 
 import java.util.*;
 
-public class WebSearchResult {
+import fit5030.ass.one.searchclient.base.ISearchResultEntry;
+
+public class WebSearchResultEntry implements ISearchResultEntry {
 	protected String summary;
 	protected String url;
 	protected Date date;

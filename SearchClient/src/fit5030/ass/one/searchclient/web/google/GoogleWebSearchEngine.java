@@ -10,6 +10,7 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import fit5030.ass.one.searchclient.base.*;
@@ -52,22 +53,28 @@ public class GoogleWebSearchEngine extends
 
 				WebSearchResultEntry entry = new WebSearchResultEntry();
 
-				entry.setTitle(doc.getElementsByTagName("title").item(i)
-						.getFirstChild().getNodeValue());
-				entry.setSummary(doc.getElementsByTagName("summary").item(i)
-						.getFirstChild().getNodeValue());
-				entry.setUrl(doc.getElementsByTagName("id").item(i)
-						.getFirstChild().getNodeValue());
+				NodeList l = nl.item(i).getChildNodes();
 
-				SimpleDateFormat mydate = new java.text.SimpleDateFormat(
-						"yyyy-MM-dd");
-				entry.setDate(mydate.parse(doc.getElementsByTagName("updated")
-						.item(i).getFirstChild().getNodeValue()));
+				for (int j = 0; j < l.getLength(); j++) {
+					Node n = l.item(j);
+					if (n.getNodeName() == "title") {
+						entry.setTitle(n.getTextContent());
+					} else if (n.getNodeName() == "summary") {
+						entry.setSummary(n.getTextContent());
+					} else if (n.getNodeName() == "id") {
+						entry.setUrl(n.getTextContent());
+					} else if (n.getNodeName() == "updated") {
+						SimpleDateFormat mydate = new java.text.SimpleDateFormat(
+								"yyyy-MM-dd");
+						entry.setDate(mydate.parse(n.getTextContent()));
+					}
+				}
 
 				result.add(entry);
 			}
 		} catch (Exception e) {
-
+			System.out.println(e.getClass().toString() + ":" + e.getMessage());
+			System.out.println(e.getStackTrace());
 		}
 		return result;
 	}

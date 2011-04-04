@@ -37,7 +37,7 @@ public class SearchResultList<T extends ISearchResultEntry> implements
 	}
 
 	public String toString() {
-		String result = "<table class='websearch'>\n";
+		String result = "<table class='searchresult'>\n";
 		for (ISearchResultEntry entry : this) {
 			result += "<tr>\n" + entry.toString() + "</tr>\n";
 		}

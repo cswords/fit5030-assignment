@@ -1,4 +1,4 @@
-package fit5030.ass.one.searchclient.web;
+package fit5030.ass.one.searchclient.web.yahoo;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -14,6 +14,7 @@ import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.methods.*;
 
 import fit5030.ass.one.searchclient.base.AbstractSearchEngine;
+import fit5030.ass.one.searchclient.web.WebSearchResultEntry;
 
 public class YahooSearchEngine extends AbstractSearchEngine {
 

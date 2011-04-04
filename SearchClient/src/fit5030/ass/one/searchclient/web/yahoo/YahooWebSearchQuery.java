@@ -1,4 +1,4 @@
-package fit5030.ass.one.searchclient.web;
+package fit5030.ass.one.searchclient.web.yahoo;
 
 public class YahooWebSearchQuery {
 	private String appid = "wLrDBTvV34GCv0NakiabQcDGxznW0GbscvtL5T.D6rABBC7QENo9v6a1xa2cFUtwBzgWcPv570.N";

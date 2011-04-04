@@ -1,7 +1,7 @@
 package fit5030.ass.one.searchclient.web.google;
 
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
+import java.text.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -45,21 +45,25 @@ public class GoogleWebSearchEngine extends
 					.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = builder.parse(rstream);
-			NodeList nl = doc.getElementsByTagName("result");
+
+			NodeList nl = doc.getElementsByTagName("entry");
+
 			for (int i = 0; i < nl.getLength(); i++) {
 
 				WebSearchResultEntry entry = new WebSearchResultEntry();
 
 				entry.setTitle(doc.getElementsByTagName("title").item(i)
 						.getFirstChild().getNodeValue());
-				entry.setSummary(doc.getElementsByTagName("abstract").item(i)
+				entry.setSummary(doc.getElementsByTagName("summary").item(i)
 						.getFirstChild().getNodeValue());
-				entry.setUrl(doc.getElementsByTagName("url").item(i)
+				entry.setUrl(doc.getElementsByTagName("id").item(i)
 						.getFirstChild().getNodeValue());
+
 				SimpleDateFormat mydate = new java.text.SimpleDateFormat(
 						"yyyy-MM-dd");
-				entry.setDate(mydate.parse(doc.getElementsByTagName("date")
+				entry.setDate(mydate.parse(doc.getElementsByTagName("updated")
 						.item(i).getFirstChild().getNodeValue()));
+
 				result.add(entry);
 			}
 		} catch (Exception e) {

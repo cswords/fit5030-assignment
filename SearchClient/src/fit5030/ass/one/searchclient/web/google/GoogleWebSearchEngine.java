@@ -58,15 +58,15 @@ public class GoogleWebSearchEngine extends
 				for (int j = 0; j < l.getLength(); j++) {
 					Node n = l.item(j);
 					if (n.getNodeName() == "title") {
-						entry.setTitle(n.getTextContent());
+						entry.setTitle(this.GetXmlNodeValue(n));
 					} else if (n.getNodeName() == "summary") {
-						entry.setSummary(n.getTextContent());
+						entry.setSummary(this.GetXmlNodeValue(n));
 					} else if (n.getNodeName() == "id") {
-						entry.setUrl(n.getTextContent());
+						entry.setUrl(this.GetXmlNodeValue(n));
 					} else if (n.getNodeName() == "updated") {
 						SimpleDateFormat mydate = new java.text.SimpleDateFormat(
 								"yyyy-MM-dd");
-						entry.setDate(mydate.parse(n.getTextContent()));
+						entry.setDate(mydate.parse(this.GetXmlNodeValue(n)));
 					}
 				}
 
@@ -79,4 +79,5 @@ public class GoogleWebSearchEngine extends
 		return result;
 	}
 
+	
 }

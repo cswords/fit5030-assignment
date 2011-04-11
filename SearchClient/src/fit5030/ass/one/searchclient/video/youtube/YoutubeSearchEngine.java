@@ -70,7 +70,7 @@ public class YoutubeSearchEngine extends
 						t += "	<param name=\"allowscriptaccess\" value=\"always\"></param>";
 						t += "	<embed wmode=\"opaque\"";
 						t += "		src=\"http://www.youtube.com/v/****?fs=1&amp;hl=en_US\" type=\"application/x-shockwave-flash\"";
-						t += "		allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"640\" height=\"390\"></embed>";
+						t += "		allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"128\" height=\"96\"></embed>";
 						t += "</object>";
 						String a = this.GetXmlNodeValue(n);
 						t = t.replace("****", a.replace(

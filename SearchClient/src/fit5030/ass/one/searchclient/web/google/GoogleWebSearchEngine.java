@@ -19,7 +19,6 @@ import fit5030.ass.one.searchclient.web.WebSearchResultEntry;
 public class GoogleWebSearchEngine extends
 		AbstractSearchEngine<GoogleWebSearchQuery, WebSearchResultEntry> {
 
-	@Override
 	public SearchResultList<WebSearchResultEntry> search(
 			GoogleWebSearchQuery query) {
 		SearchResultList<WebSearchResultEntry> result = new SearchResultList<WebSearchResultEntry>();

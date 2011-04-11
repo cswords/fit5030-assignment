@@ -79,10 +79,9 @@ public class YahooWebSearchEngine extends
 			YahooWebSearchQuery query, int pageSize, int pageNumber) {
 		query.setOption("count", String.valueOf(pageSize));
 		query.setOption("start", String.valueOf(pageNumber));//default start=0
-		System.out.println(query);
-		
+
 		SearchResultList<WebSearchResultEntry> result=this.search(query);
-		
+
 		result.setPageNumber(pageNumber);
 		result.setPageSize(pageSize);
 		return result;

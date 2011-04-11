@@ -75,13 +75,14 @@ public class FlickrSearchEngine extends
 	public SearchResultList<ImageSearchResultEntry> search(
 			FlickrSearchQuery query,int pageSize, int pageNumber) {
 		
-			query.setOption("per_page", String.valueOf(pageSize)); //number of pics per page
-			query.setOption("page", String.valueOf(pageNumber)); //index of page default=1
+		query.setOption("per_page", String.valueOf(pageSize)); //number of pics per page
+		query.setOption("page", String.valueOf(pageNumber)); //index of page default=1
 			
-			SearchResultList<ImageSearchResultEntry> result=this.search(query);
-			result.setPageSize(pageSize);
-			result.setPageSize(pageSize);
-			return result;
+		SearchResultList<ImageSearchResultEntry> result=this.search(query);
+		
+		result.setPageSize(pageSize);
+		result.setPageSize(pageSize);
+		return result;
 	}
 
 	

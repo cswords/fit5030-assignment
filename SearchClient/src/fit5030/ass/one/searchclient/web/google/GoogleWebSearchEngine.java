@@ -79,5 +79,17 @@ public class GoogleWebSearchEngine extends
 		return result;
 	}
 
-	
+	@Override
+	public SearchResultList<WebSearchResultEntry> search(
+			GoogleWebSearchQuery query, int pageSize, int pageNumber) {
+		
+		query.setOption("start", (pageSize * (pageNumber - 1) + 1) + "");
+		query.setOption("num", pageSize + "");
+
+		SearchResultList<WebSearchResultEntry> result = this.search(query);
+		result.setPageNumber(pageNumber);
+		result.setPageSize(pageSize);
+		return result;
+	}
+
 }

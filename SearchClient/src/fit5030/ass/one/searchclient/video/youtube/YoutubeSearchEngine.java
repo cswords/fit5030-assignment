@@ -69,7 +69,7 @@ public class YoutubeSearchEngine extends
 						t += "	<param name=\"allowFullScreen\" value=\"true\"></param>";
 						t += "	<param name=\"allowscriptaccess\" value=\"always\"></param>";
 						t += "	<embed wmode=\"opaque\"";
-						t += "		src=\"http://www.youtube.com/v/Lfso7_i9Ko8?fs=1&amp;hl=en_US\" type=\"application/x-shockwave-flash\"";
+						t += "		src=\"http://www.youtube.com/v/****?fs=1&amp;hl=en_US\" type=\"application/x-shockwave-flash\"";
 						t += "		allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"640\" height=\"390\"></embed>";
 						t += "</object>";
 						String a = this.GetXmlNodeValue(n);
@@ -90,6 +90,20 @@ public class YoutubeSearchEngine extends
 			System.out.println(e.getClass().toString() + ":" + e.getMessage());
 			System.out.println(e.getStackTrace());
 		}
+		return result;
+	}
+
+	@Override
+	public SearchResultList<VideoSearchResultEntry> search(
+			YoutubeSearchQuery query, int pageSize, int pageNumber) {
+
+		// http://gdata.youtube.com/feeds/api/videos?max-results=10&start-index=5
+		query.setOption("start-index", (pageSize * (pageNumber - 1) + 1) + "");
+		query.setOption("max-results", pageSize + "");
+
+		SearchResultList<VideoSearchResultEntry> result = this.search(query);
+		result.setPageNumber(pageNumber);
+		result.setPageSize(pageSize);
 		return result;
 	}
 

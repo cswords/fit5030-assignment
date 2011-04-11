@@ -43,8 +43,8 @@ public class WebSearchResultEntry implements ISearchResultEntry {
 	}
 
 	public String toString() {
-		String result = "<td>" + this.getTitle() + "</td>\n";
-		result += "<td><a href='" + this.getUrl() + "'>" + this.getSummary()
+		String result = "<td>" + this.getTitle() + "<br />";
+		result += "<a href='" + this.getUrl() + "'>" + this.getSummary()
 				+ "</a></td>\n";
 		return result;
 	}

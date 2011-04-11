@@ -11,13 +11,14 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		FlickrSearchEngine se = new FlickrSearchEngine();
-		FlickrSearchQuery query = new FlickrSearchQuery();
+		YahooWebSearchEngine webse = new YahooWebSearchEngine();
+		YahooWebSearchQuery webquery = new YahooWebSearchQuery();
 		
-		query.setQueryInput("monash&nbsp;student");
-		System.out.println(query);
-		System.out.println(se.search(query));
+		FlickrSearchEngine imgse=new FlickrSearchEngine();
+		FlickrSearchQuery imgquery=new FlickrSearchQuery();
+		
+		imgquery.setQueryInput("melbourne");
+		System.out.println(imgse.search(imgquery,3,2));
 	}
 
 }

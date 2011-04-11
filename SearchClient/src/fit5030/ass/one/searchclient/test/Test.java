@@ -18,9 +18,9 @@ public class Test {
 		FlickrSearchQuery imgquery=new FlickrSearchQuery();
 		
 		webquery.setQueryInput("melbourne");
-		System.out.println(webse.search(webquery,3,2));
+		System.out.println(webse.search(webquery,3,0));
 		
-		imgquery.setQueryInput("melbourne");
+		imgquery.setQueryInput("china");
 		System.out.println(imgse.search(imgquery,3,2));
 		
 	}

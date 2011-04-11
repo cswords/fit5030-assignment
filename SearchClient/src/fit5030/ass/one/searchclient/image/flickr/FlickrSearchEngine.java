@@ -1,8 +1,6 @@
 package fit5030.ass.one.searchclient.image.flickr;
 
 import java.io.InputStream;
-import java.text.*;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -10,12 +8,10 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import fit5030.ass.one.searchclient.base.AbstractSearchEngine;
 import fit5030.ass.one.searchclient.base.SearchResultList;
 import fit5030.ass.one.searchclient.image.ImageSearchResultEntry;
-import fit5030.ass.one.searchclient.web.WebSearchResultEntry;
 
 public class FlickrSearchEngine extends
 		AbstractSearchEngine<FlickrSearchQuery, ImageSearchResultEntry> {

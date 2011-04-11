@@ -6,6 +6,7 @@ public class YahooWebSearchQuery extends AbstractQuery {
 	public YahooWebSearchQuery(){
 		this.setOption("appid", "wLrDBTvV34GCv0NakiabQcDGxznW0GbscvtL5T.D6rABBC7QENo9v6a1xa2cFUtwBzgWcPv570.N");
 		this.setOption("format", "xml");
+		
 	}
 	
 	

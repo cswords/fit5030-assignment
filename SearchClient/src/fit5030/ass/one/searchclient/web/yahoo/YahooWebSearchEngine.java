@@ -66,10 +66,10 @@ public class YahooWebSearchEngine extends
 				}
 				result.add(entry);
 			}
-			
+
 		} catch (Exception e) {
-		System.out.print(e.getMessage());
-		//	System.out.print(e.getStackTrace());
+			System.out.print(e.getMessage());
+			// System.out.print(e.getStackTrace());
 		}
 		return result;
 
@@ -78,9 +78,9 @@ public class YahooWebSearchEngine extends
 	public SearchResultList<WebSearchResultEntry> search(
 			YahooWebSearchQuery query, int pageSize, int pageNumber) {
 		query.setOption("count", String.valueOf(pageSize));
-		query.setOption("start", String.valueOf(pageNumber));//default start=0
+		query.setOption("start", String.valueOf(pageNumber));// default start=0
 
-		SearchResultList<WebSearchResultEntry> result=this.search(query);
+		SearchResultList<WebSearchResultEntry> result = this.search(query);
 
 		result.setPageNumber(pageNumber);
 		result.setPageSize(pageSize);
@@ -88,5 +88,4 @@ public class YahooWebSearchEngine extends
 
 	}
 
-	
 }

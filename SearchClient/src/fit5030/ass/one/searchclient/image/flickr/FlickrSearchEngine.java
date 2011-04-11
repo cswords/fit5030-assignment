@@ -16,7 +16,6 @@ import fit5030.ass.one.searchclient.image.ImageSearchResultEntry;
 public class FlickrSearchEngine extends
 		AbstractSearchEngine<FlickrSearchQuery, ImageSearchResultEntry> {
 
-	
 	public SearchResultList<ImageSearchResultEntry> search(
 			FlickrSearchQuery query) {
 		SearchResultList<ImageSearchResultEntry> result = new SearchResultList<ImageSearchResultEntry>();
@@ -57,11 +56,12 @@ public class FlickrSearchEngine extends
 				String title = this.GetXmlNodeValue(nl.item(i).getAttributes()
 						.getNamedItem("title"));
 				entry.setTitle(title);
-				entry.setUrl("http://farm" + farm_id + ".static.flickr.com/"
-						+ server_id + "/" + photo_id + "_" + secret + "_s"
-						+ ".jpg");
-				entry.setOriginalUrl("http://farm" + farm_id + ".static.flickr.com/"
-						+ server_id + "/" + photo_id + "_" + secret+".jpg");
+				entry.setThumbUrl("http://farm" + farm_id
+						+ ".static.flickr.com/" + server_id + "/" + photo_id
+						+ "_" + secret + "_s" + ".jpg");
+				entry.setPhotoUrl("http://farm" + farm_id
+						+ ".static.flickr.com/" + server_id + "/" + photo_id
+						+ "_" + secret + ".jpg");
 				result.add(entry);
 			}
 
@@ -73,17 +73,20 @@ public class FlickrSearchEngine extends
 	}
 
 	public SearchResultList<ImageSearchResultEntry> search(
-			FlickrSearchQuery query,int pageSize, int pageNumber) {
+			FlickrSearchQuery query, int pageSize, int pageNumber) {
+
+		query.setOption("per_page", String.valueOf(pageSize)); // number of pics
+																// per page
+		query.setOption("page", String.valueOf(pageNumber)); // index of page
+																// default=1
+	//	System.out.println(query);
 		
-		query.setOption("per_page", String.valueOf(pageSize)); //number of pics per page
-		query.setOption("page", String.valueOf(pageNumber)); //index of page default=1
-			
-		SearchResultList<ImageSearchResultEntry> result=this.search(query);
+		SearchResultList<ImageSearchResultEntry> result = this.search(query);
+
 		
 		result.setPageSize(pageSize);
-		result.setPageSize(pageSize);
+		result.setPageNumber(pageNumber);
 		return result;
 	}
 
-	
 }

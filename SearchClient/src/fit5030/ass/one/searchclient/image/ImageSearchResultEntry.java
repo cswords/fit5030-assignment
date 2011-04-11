@@ -3,40 +3,48 @@ package fit5030.ass.one.searchclient.image;
 import fit5030.ass.one.searchclient.base.ISearchResultEntry;
 
 public class ImageSearchResultEntry implements ISearchResultEntry {
-	protected String url;
+	protected String thumbUrl;
 	protected String title;
-	protected String originalUrl;
+	protected String photoUrl;
 
-	public String getOriginalUrl() {
-		return originalUrl;
+
+	public String getThumbUrl() {
+		return thumbUrl;
 	}
 
-	public void setOriginalUrl(String originalUrl) {
-		this.originalUrl = originalUrl;
+
+	public void setThumbUrl(String thumbUrl) {
+		this.thumbUrl = thumbUrl;
 	}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
 
 	public String getTitle() {
 		return title;
 	}
 
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+
+	public String getPhotoUrl() {
+		return photoUrl;
+	}
+
+
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
+	}
+
+
 	public String toString() {
 		String result = "<td>" + this.getTitle() + "<br>" + "<a href="
-				+ this.getOriginalUrl() + ">" + "<img src=" + this.getUrl()
+				+ this.getPhotoUrl() + ">" + "<img src=" + this.getThumbUrl()
 				+ "></img>" + "</a></td>";
 
 		return result;
 	}
+
 
 }

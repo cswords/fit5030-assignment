@@ -44,8 +44,7 @@ public class PicasaSearchEngine extends
 			Document doc = builder.parse(rstream);
 
 			NodeList nl = doc.getElementsByTagName("entry");
-			// System.out.println(nl.getLength());
-
+			
 			for (int i = 0; i < nl.getLength(); i++) {
 				ImageSearchResultEntry entry = new ImageSearchResultEntry();
 				NodeList nl2 = nl.item(i).getChildNodes();

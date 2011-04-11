@@ -16,7 +16,7 @@ public class Test {
 		YahooWebSearchEngine webse = new YahooWebSearchEngine();
 		YahooWebSearchQuery webquery = new YahooWebSearchQuery();
 		webquery.setQueryInput("beijing");
-		System.out.println(webse.search(webquery,5,0));
+		System.out.println(webse.search(webquery,5,1));
 	
 		FlickrSearchEngine imgse=new FlickrSearchEngine();
 		FlickrSearchQuery imgquery=new FlickrSearchQuery();

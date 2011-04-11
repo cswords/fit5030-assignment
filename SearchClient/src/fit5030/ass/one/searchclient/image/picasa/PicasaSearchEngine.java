@@ -90,8 +90,7 @@ public class PicasaSearchEngine extends
 				String.valueOf((pageNumber - 1) * pageSize + 1)); // index of
 																	// page
 																	// default=1
-		System.out.println(query);
-
+	
 		SearchResultList<ImageSearchResultEntry> result = this.search(query);
 
 		result.setPageSize(pageSize);

@@ -55,6 +55,8 @@ public class FlickrSearchEngine extends
 						.getAttributes().getNamedItem("server"));
 				String title = this.GetXmlNodeValue(nl.item(i).getAttributes()
 						.getNamedItem("title"));
+				String owner = this.GetXmlNodeValue(nl.item(i).getAttributes()
+						.getNamedItem("owner"));
 				entry.setTitle(title);
 				entry.setThumbUrl("http://farm" + farm_id
 						+ ".static.flickr.com/" + server_id + "/" + photo_id
@@ -79,8 +81,7 @@ public class FlickrSearchEngine extends
 																// per page
 		query.setOption("page", String.valueOf(pageNumber)); // index of page
 																// default=1
-	//	System.out.println(query);
-		
+			
 		SearchResultList<ImageSearchResultEntry> result = this.search(query);
 
 		

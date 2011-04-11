@@ -11,7 +11,9 @@ public class GWTest {
 		GoogleWebSearchQuery q = new GoogleWebSearchQuery();
 		q.setQueryInput("Monash");
 		GoogleWebSearchEngine e = new GoogleWebSearchEngine();
-		System.out.println(e.search(q));
+		System.out.println(e.search(q,2,1));
+		System.out.println(e.search(q,2,2));
+		System.out.println(e.search(q,4,1));
 	}
 
 }

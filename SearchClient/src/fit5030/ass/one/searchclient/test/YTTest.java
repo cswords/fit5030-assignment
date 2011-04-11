@@ -13,7 +13,7 @@ public class YTTest {
 		YoutubeSearchQuery q = new YoutubeSearchQuery();
 		q.setQueryInput("Monash");
 		YoutubeSearchEngine e = new YoutubeSearchEngine();
-		System.out.println(e.search(q));
+		System.out.println(e.search(q, 4, 1));
 
 	}
 

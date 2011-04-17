@@ -1,6 +1,8 @@
 package fit5030.ass.one.searchclient.ui;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+
 import javax.servlet.http.*;
 
 import fit5030.ass.one.searchclient.image.flickr.*;
@@ -23,6 +25,7 @@ public class Service extends HttpServlet {
 			int pageSize = Integer.parseInt(req.getParameter("size"));
 			int pageNumber = Integer.parseInt(req.getParameter("page"));
 			String query = req.getParameter("q");
+			query=URLEncoder.encode(query, "UTF-8");
 
 			switch (queryType) {
 			case GoogleWeb:
@@ -86,7 +89,7 @@ public class Service extends HttpServlet {
 		PicasaSearchEngine e = new PicasaSearchEngine();
 		return e.search(q, pageSize, pageNumber).toString();
 	}
-
+	
 	enum QueryType {
 		GoogleWeb, YahooWeb, Youtube, Flickr, Picasa;
 		public static QueryType parse(String name) {

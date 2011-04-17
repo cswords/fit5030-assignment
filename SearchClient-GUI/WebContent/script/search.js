@@ -5,10 +5,20 @@ function query() {
 	var query = document.getElementById("searchText").value;
 	var psize = document.getElementById("pageSize").value;
 	var pnum = document.getElementById("pageNumber").value;
+	
+	// set the type of encoding to numerical entities e.g & instead of &
+	Encoder.EncodeType = "numerical";
+
+	// or to set it to encode to html entities e.g & instead of &
+	Encoder.EncodeType = "entity";
+
+	// HTML encode text from an input element
+	// This will prevent double encoding.
+	query = encodeURIComponent(query);
+	
 	if (document.getElementById("dogoogle").checked) {
 		var qgoogleweb = './service?qtype=googleweb&page=' + pnum + '&size='
 				+ psize + '&q=' + query;
-		alert(qgoogleweb);
 		$('#googleweb').load(qgoogleweb);
 	} else {
 		$('#googleweb').html('');

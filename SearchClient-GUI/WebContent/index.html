@@ -3,14 +3,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Hello Web Service!</title>
+<link type="text/css"
+	href="./style/ui-lightness/jquery-ui-1.8.11.custom.css"
+	rel="stylesheet" />
 <script type="text/javascript" src="./script/jquery-1.5.2.min.js"></script>
+<script type="text/javascript"
+	src="./script/jquery-ui-1.8.11.datepicker.min.js"></script>
 <script type="text/javascript" src="./script/search.js"></script>
 </head>
 <body>
 	<table width="100%">
 		<tr>
-			<td width="50%" colspan="2"><input type="text" name="q" value=""
-				id="searchText" maxlength="256" style="width: 100%" /> <br /> <input
+			<td width="50%" colspan="2" align="left"><input type="text" name="q" value=""
+				id="searchText" maxlength="256" style="width: 90%" /> <br /> <input
 				type="checkbox" name="dogoogle" id="dogoogle" checked="checked">Google
 				Web <input type="checkbox" name="doyahoo" id="doyahoo"
 				checked="checked">Yahoo Web <input type="checkbox"
@@ -18,9 +23,13 @@
 				type="checkbox" name="doflickr" id="doflickr" checked="checked">Flickr
 				<input type="checkbox" name="dopicasa" id="dopicasa"
 				checked="checked">Picasa</td>
-			<td width="25%">Page Size: <input type="text" name="q"
+			<td width="25%">Page Size: <input type="text" name="pageSize"
 				value="10" id="pageSize" style="width: 30px;" />Page No.: <input
-				type="text" name="q" value="1" id="pageNumber" style="width: 30px;" />
+				type="text" name="pageNumber" value="1" id="pageNumber"
+				style="width: 30px;" /> <br />From: <input type="text"
+				name="fromDate" id="fromDate" style="width: 75px;" />To:
+				<input type="text" name="toDate" id="toDate"
+				style="width: 75px;" />
 			</td>
 			<td width="25%"><input type="submit" id="searchSubmit"
 				value="Search" onclick="javascript:query()" /> <input value="&lt;"

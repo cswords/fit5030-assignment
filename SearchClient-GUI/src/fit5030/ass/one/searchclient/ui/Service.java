@@ -2,6 +2,10 @@ package fit5030.ass.one.searchclient.ui;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.*;
 
@@ -25,7 +29,21 @@ public class Service extends HttpServlet {
 			int pageSize = Integer.parseInt(req.getParameter("size"));
 			int pageNumber = Integer.parseInt(req.getParameter("page"));
 			String query = req.getParameter("q");
-			query=URLEncoder.encode(query, "UTF-8");
+			query = URLEncoder.encode(query, "UTF-8");
+
+			DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+			String fromStr = req.getParameter("from");
+			Date fromDate = null;
+			if (fromStr != null)
+				if (fromStr.trim().length() > 0)
+					fromDate = df.parse(fromStr);
+
+			String toStr = req.getParameter("to");
+			Date toDate = null;
+			if (toStr != null)
+				if (toStr.trim().length() > 0)
+					toDate = df.parse(toStr);
 
 			switch (queryType) {
 			case GoogleWeb:
@@ -38,10 +56,12 @@ public class Service extends HttpServlet {
 				respHtml = this.youtube(query, pageSize, pageNumber);
 				break;
 			case Flickr:
-				respHtml = this.flickr(query, pageSize, pageNumber);
+				respHtml = this.flickr(query, pageSize, pageNumber, fromDate,
+						toDate);
 				break;
 			case Picasa:
-				respHtml = this.picasa(query, pageSize, pageNumber);
+				respHtml = this.picasa(query, pageSize, pageNumber, fromDate,
+						toDate);
 				break;
 			default:
 				throw new UnsupportedOperationException(
@@ -50,6 +70,9 @@ public class Service extends HttpServlet {
 
 			resp.getWriter().print(respHtml);
 		} catch (IllegalArgumentException e) {
+			resp.getOutputStream().print(
+					"Please check the parameters of your request.");
+		} catch (ParseException e) {
 			resp.getOutputStream().print(
 					"Please check the parameters of your request.");
 		}
@@ -76,20 +99,30 @@ public class Service extends HttpServlet {
 		return e.search(q, pageSize, pageNumber).toString();
 	}
 
-	private String flickr(String query, int pageSize, int pageNumber) {
+	private String flickr(String query, int pageSize, int pageNumber,
+			Date from, Date to) {
 		FlickrSearchQuery q = new FlickrSearchQuery();
 		q.setQueryInput(query);
+		if (from != null & to != null) {
+			q.setMinUploadDate(from);
+			q.setMaxUploadDate(to);
+		}
 		FlickrSearchEngine e = new FlickrSearchEngine();
 		return e.search(q, pageSize, pageNumber).toString();
 	}
 
-	private String picasa(String query, int pageSize, int pageNumber) {
+	private String picasa(String query, int pageSize, int pageNumber,
+			Date from, Date to) {
 		PicasaSearchQuery q = new PicasaSearchQuery();
 		q.setQueryInput(query);
+		if (from != null & to != null) {
+			q.setMinPublishDate(from);
+			q.setMaxPublishDate(to);
+		}
 		PicasaSearchEngine e = new PicasaSearchEngine();
 		return e.search(q, pageSize, pageNumber).toString();
 	}
-	
+
 	enum QueryType {
 		GoogleWeb, YahooWeb, Youtube, Flickr, Picasa;
 		public static QueryType parse(String name) {
@@ -107,4 +140,14 @@ public class Service extends HttpServlet {
 				throw new IllegalArgumentException("Unknow query type.");
 		}
 	}
+
+	public static String getUrl(HttpServletRequest req) {
+		String reqUrl = req.getRequestURL().toString();
+		String queryString = req.getQueryString(); // d=789
+		if (queryString != null) {
+			reqUrl += "?" + queryString;
+		}
+		return reqUrl;
+	}
+
 }

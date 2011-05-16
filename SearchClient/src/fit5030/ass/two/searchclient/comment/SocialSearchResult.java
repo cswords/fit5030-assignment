@@ -21,10 +21,4 @@ public class SocialSearchResult extends
 	public int[] getTrend() {
 		return trend;
 	}
-	
-	public void setTrend(int days,int trend){
-		this.trend[days]=trend;
-	}
-	
-	
 }

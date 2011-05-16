@@ -12,42 +12,46 @@ import fit5030.ass.one.searchclient.web.yahoo.YahooWebSearchQuery;
 import fit5030.ass.two.searchclient.comment.SocialSearchQuery;
 import fit5030.ass.two.searchclient.comment.twitter.*;
 
-
 public class Test {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-/*		YahooWebSearchEngine webse = new YahooWebSearchEngine();
-		YahooWebSearchQuery webquery = new YahooWebSearchQuery();
-		webquery.setQueryInput("beijing");
-		System.out.println(webse.search(webquery,5,1));
-	
-		FlickrSearchEngine imgse=new FlickrSearchEngine();
-		FlickrSearchQuery imgquery=new FlickrSearchQuery();
-		imgquery.setQueryInput("shanghai");
-		System.out.println(imgse.search(imgquery,5,2));
-		
-		PicasaSearchEngine se=new PicasaSearchEngine();
-		PicasaSearchQuery query=new PicasaSearchQuery();
-		query.setQueryInput("usa");
-		System.out.println(se.search(query,10,1));*/
-		
-//		TwitterCommentSearchEngine twitterse=new TwitterCommentSearchEngine();
-//		TwitterSingleDaySearchQuery twitterq=new TwitterSingleDaySearchQuery();
-//		System.out.println(twitterq);
-//		twitterse.search(twitterq, 100, 1);
-		TwitterSingleDaySearchQuery q=new TwitterSingleDaySearchQuery();
-		q.setQueryInput("monash");
-		q.setDate(new Date());
-		System.out.println(q);
-		TwitterSingleDaySearchEngine e=new TwitterSingleDaySearchEngine();
-		e.search(q);
-		
-		
+		/*
+		 * YahooWebSearchEngine webse = new YahooWebSearchEngine();
+		 * YahooWebSearchQuery webquery = new YahooWebSearchQuery();
+		 * webquery.setQueryInput("beijing");
+		 * System.out.println(webse.search(webquery,5,1));
+		 * 
+		 * FlickrSearchEngine imgse=new FlickrSearchEngine(); FlickrSearchQuery
+		 * imgquery=new FlickrSearchQuery(); imgquery.setQueryInput("shanghai");
+		 * System.out.println(imgse.search(imgquery,5,2));
+		 * 
+		 * PicasaSearchEngine se=new PicasaSearchEngine(); PicasaSearchQuery
+		 * query=new PicasaSearchQuery(); query.setQueryInput("usa");
+		 * System.out.println(se.search(query,10,1));
+		 */
 
-		
+		// TwitterCommentSearchEngine twitterse=new
+		// TwitterCommentSearchEngine();
+		// TwitterSingleDaySearchQuery twitterq=new
+		// TwitterSingleDaySearchQuery();
+		// System.out.println(twitterq);
+		// twitterse.search(twitterq, 100, 1);
+		// TwitterSingleDaySearchQuery q=new TwitterSingleDaySearchQuery();
+		// q.setQueryInput("monash");
+		// q.setDate(new Date());
+		// System.out.println(q);
+		// TwitterSingleDaySearchEngine e=new TwitterSingleDaySearchEngine();
+		// e.search(q);
+
+		TwitterCommentSearchEngine e = new TwitterCommentSearchEngine();
+		TwitterCommentSearchQuery q = new TwitterCommentSearchQuery();
+		q.setDays(5);
+		q.setQueryInput("melbourne");
+		e.search(q);
+
 	}
 
 }

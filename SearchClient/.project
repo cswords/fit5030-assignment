@@ -3,6 +3,7 @@
 	<name>SearchClient</name>
 	<comment></comment>
 	<projects>
+		<project>Ass1-SearchClient-GUI</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

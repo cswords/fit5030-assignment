@@ -82,7 +82,7 @@ public class YahooWebSearchEngine extends
 																	// start=0
 
 		SearchResultList<WebSearchResultEntry> result = this.search(query);
-
+		
 		result.setPageNumber(pageNumber);
 		result.setPageSize(pageSize);
 		return result;

@@ -2,10 +2,9 @@ package fit5030.ass.two.searchclient.comment.twitter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import fit5030.ass.two.searchclient.comment.SocialSearchQuery;
 
-import fit5030.ass.one.searchclient.base.AbstractQuery;
-
-public class TwitterCommentSearchQuery extends AbstractQuery {
+public class TwitterCommentSearchQuery extends SocialSearchQuery {
 	public TwitterCommentSearchQuery() {
 
 	}
@@ -15,14 +14,13 @@ public class TwitterCommentSearchQuery extends AbstractQuery {
 		return "http://search.twitter.com/search.atom?q=";
 	}
 
-	public void setMinCommentDate(Date from) {
+	protected void setMinCommentDate(Date from) {
 		this.setOption("since",
 				(new SimpleDateFormat("yyyy-MM-dd")).format(from));
 	}
 
-	public void setMaxCommentDate(Date to) {
-		this.setOption("until", 
-				(new SimpleDateFormat("yyyy-MM-dd")).format(to));
+	protected void setMaxCommentDate(Date to) {
+		this.setOption("until", (new SimpleDateFormat("yyyy-MM-dd")).format(to));
 	}
 
 }

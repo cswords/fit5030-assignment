@@ -1,13 +1,17 @@
 package fit5030.ass.one.searchclient.test;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import fit5030.ass.one.searchclient.image.flickr.FlickrSearchEngine;
 import fit5030.ass.one.searchclient.image.flickr.FlickrSearchQuery;
 import fit5030.ass.one.searchclient.image.picasa.PicasaSearchEngine;
 import fit5030.ass.one.searchclient.image.picasa.PicasaSearchQuery;
 import fit5030.ass.one.searchclient.web.yahoo.YahooWebSearchEngine;
 import fit5030.ass.one.searchclient.web.yahoo.YahooWebSearchQuery;
-import fit5030.ass.two.searchclient.comment.twitter.TwitterCommentSearchEngine;
-import fit5030.ass.two.searchclient.comment.twitter.TwitterCommentSearchQuery;
+import fit5030.ass.two.searchclient.comment.SocialSearchQuery;
+import fit5030.ass.two.searchclient.comment.twitter.*;
+
 
 public class Test {
 
@@ -30,12 +34,19 @@ public class Test {
 		query.setQueryInput("usa");
 		System.out.println(se.search(query,10,1));*/
 		
-		TwitterCommentSearchEngine twitterse=new TwitterCommentSearchEngine();
-		TwitterCommentSearchQuery twitterq=new TwitterCommentSearchQuery();
-		twitterq.setQueryInput("melbourne");
-		System.out.println(twitterq);
-		twitterse.search(twitterq, 100, 1);
+//		TwitterCommentSearchEngine twitterse=new TwitterCommentSearchEngine();
+//		TwitterSingleDaySearchQuery twitterq=new TwitterSingleDaySearchQuery();
+//		System.out.println(twitterq);
+//		twitterse.search(twitterq, 100, 1);
+		TwitterSingleDaySearchQuery q=new TwitterSingleDaySearchQuery();
+		q.setQueryInput("monash");
+		q.setDate(new Date());
+		System.out.println(q);
+		TwitterSingleDaySearchEngine e=new TwitterSingleDaySearchEngine();
+		e.search(q);
 		
+		
+
 		
 	}
 

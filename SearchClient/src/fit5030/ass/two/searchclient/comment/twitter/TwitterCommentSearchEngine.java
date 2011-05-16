@@ -9,14 +9,15 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import fit5030.ass.one.searchclient.base.AbstractSearchEngine;
 import fit5030.ass.one.searchclient.base.SearchResultList;
 import fit5030.ass.two.searchclient.comment.CommentSearchResultEntry;
+import fit5030.ass.two.searchclient.comment.SocialSearchResult;
 
 public class TwitterCommentSearchEngine
 		extends
 		AbstractSearchEngine<TwitterCommentSearchQuery, CommentSearchResultEntry> {
 
-	public SearchResultList<CommentSearchResultEntry> search(
+	public SocialSearchResult search(
 			TwitterCommentSearchQuery query) {
-		SearchResultList<CommentSearchResultEntry> result = new SearchResultList<CommentSearchResultEntry>();
+		SocialSearchResult result = new SocialSearchResult();
 
 		try {
 			HttpClient client = new HttpClient();
@@ -37,14 +38,14 @@ public class TwitterCommentSearchEngine
 		return result;
 	}
 
-	public SearchResultList<CommentSearchResultEntry> search(
+	public SocialSearchResult search(
 			TwitterCommentSearchQuery query, int pageSize, int pageNumber) {
 		query.setOption("rpp", String.valueOf(pageSize));
 		query.setOption("page", String.valueOf(pageNumber));
 		
 		System.out.println(query);
 		
-		SearchResultList<CommentSearchResultEntry> result = this.search(query);
+		SocialSearchResult result = this.search(query);
 		result.setPageSize(pageSize);
 		result.setPageNumber(pageNumber);
 		return result;

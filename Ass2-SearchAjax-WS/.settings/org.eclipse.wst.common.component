@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Ass2-SearchAjax-WS">
+        <wb-resource deploy-path="/" source-path="/WebContent"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="Ass1-SearchClient.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SearchClient/SearchClient">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="Ass2-SearchAjax-WS"/>
+        <property name="java-output-path" value="/Ass2-SearchAjax-WS/build/classes"/>
+    </wb-module>
+</project-modules>

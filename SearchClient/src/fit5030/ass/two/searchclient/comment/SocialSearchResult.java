@@ -25,12 +25,27 @@ public class SocialSearchResult extends
 
 	public String toString() {
 		String result = "<table>\n";
-		for (int i=0;i<this.getDays();i++) {
-			result += "<tr>\n" +"<td>Number of comment on Day " + this.getDays() + "="
-			+ this.trend[i] + "</td>\n" + "</tr>\n";
+		for (int i = 0; i < this.getDays(); i++) {
+			if (i == 0)
+				result += "<tr>\n"
+						+ "<td>Today: </td><td>"
+						+ ((this.trend[i] < 1500) ? this.trend[i]
+								: "very hot!(>=1500)") + "</td>\n" + "</tr>\n";
+			else if (i == 1)
+				result += "<tr>\n"
+						+ "<td>Yesterday: </td><td>"
+						+ ((this.trend[i] < 1500) ? this.trend[i]
+								: "very hot!(>=1500)") + "</td>\n" + "</tr>\n";
+			else
+				result += "<tr>\n"
+						+ "<td>"
+						+ i
+						+ " days before: </td><td>"
+						+ ((this.trend[i] < 1500) ? this.trend[i]
+								: "very hot!(>=1500)") + "</td>\n" + "</tr>\n";
 		}
 		result += "</table>";
-		
+
 		return result;
 	}
 

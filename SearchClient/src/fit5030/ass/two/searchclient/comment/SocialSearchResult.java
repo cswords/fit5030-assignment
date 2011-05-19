@@ -21,4 +21,6 @@ public class SocialSearchResult extends
 	public int[] getTrend() {
 		return trend;
 	}
+	
+	
 }

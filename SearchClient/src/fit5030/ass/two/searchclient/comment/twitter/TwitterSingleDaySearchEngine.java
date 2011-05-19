@@ -52,8 +52,8 @@ public class TwitterSingleDaySearchEngine
 
 			}
 
-			System.out.println("Total trend=" + result.getTrend());
-			System.out.println(query);
+//			System.out.println("Total trend=" + result.getTrend());
+//			System.out.println(query);
 
 		} catch (Exception e) {
 			System.out.print(e.getMessage());

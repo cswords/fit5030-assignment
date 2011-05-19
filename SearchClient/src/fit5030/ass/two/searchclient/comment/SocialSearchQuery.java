@@ -10,7 +10,7 @@ public abstract class SocialSearchQuery extends AbstractQuery {
 
 	protected abstract void setMaxCommentDate(Date date);
 
-	protected int days = 7;
+	protected int days = 5;
 
 	public int getDays() {
 		return days;

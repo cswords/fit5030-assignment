@@ -44,7 +44,7 @@ public class TwitterCommentSearchEngine
 		query.setOption("rpp", String.valueOf(pageSize));
 		query.setOption("page", String.valueOf(pageNumber));
 
-		System.out.println(query);
+		//System.out.println(query);
 
 		SocialSearchResult result = this.search(query);
 		result.setPageSize(pageSize);

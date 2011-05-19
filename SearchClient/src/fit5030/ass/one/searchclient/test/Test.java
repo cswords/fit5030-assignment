@@ -33,23 +33,11 @@ public class Test {
 		 * System.out.println(se.search(query,10,1));
 		 */
 
-		// TwitterCommentSearchEngine twitterse=new
-		// TwitterCommentSearchEngine();
-		// TwitterSingleDaySearchQuery twitterq=new
-		// TwitterSingleDaySearchQuery();
-		// System.out.println(twitterq);
-		// twitterse.search(twitterq, 100, 1);
-		// TwitterSingleDaySearchQuery q=new TwitterSingleDaySearchQuery();
-		// q.setQueryInput("monash");
-		// q.setDate(new Date());
-		// System.out.println(q);
-		// TwitterSingleDaySearchEngine e=new TwitterSingleDaySearchEngine();
-		// e.search(q);
 
 		TwitterCommentSearchEngine e = new TwitterCommentSearchEngine();
 		TwitterCommentSearchQuery q = new TwitterCommentSearchQuery();
 		q.setDays(5);
-		q.setQueryInput("melbourne");
+		q.setQueryInput("monash");
 		e.search(q);
 
 	}

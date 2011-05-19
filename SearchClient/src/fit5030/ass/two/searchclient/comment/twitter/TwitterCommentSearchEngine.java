@@ -33,9 +33,9 @@ public class TwitterCommentSearchEngine
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
 		}
-		for (int j = 0; j < result.getDays(); j++)
-			System.out.println("result of day[" + j + "] is "
-					+ result.getTrend()[j]);
+		//for (int j = 0; j < result.getDays(); j++)
+		//	System.out.println("result of day[" + j + "] is "
+		//			+ result.getTrend()[j]);
 		return result;
 	}
 

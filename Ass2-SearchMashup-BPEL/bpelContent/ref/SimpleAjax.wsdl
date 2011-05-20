@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://webservice.searchclient.two.ass.fit5030" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax21="http://webservice.searchclient.two.ass.fit5030/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://webservice.searchclient.two.ass.fit5030">
+    <wsdl:documentation>
+		Please Type your service description here
+	</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ax22="http://webservice.searchclient.two.ass.fit5030/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://webservice.searchclient.two.ass.fit5030">
+            <xs:import namespace="http://webservice.searchclient.two.ass.fit5030/xsd"/>
+            <xs:element name="webSearch">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="query" nillable="true" type="ax22:WebSearchQuery"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="webSearchResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="videoSearch">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="query" nillable="true" type="ax22:VideoSearchQuery"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="videoSearchResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="socialSearch">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="query" nillable="true" type="ax22:SocialSearchQuery"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="socialSearchResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="imageSearch">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="query" nillable="true" type="ax22:ImageSearchQuery"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="imageSearchResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://webservice.searchclient.two.ass.fit5030/xsd">
+            <xs:complexType name="AjaxQuery">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="format" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="queryName" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="PagingAjaxQuery">
+                <xs:complexContent>
+                    <xs:extension base="ax21:AjaxQuery">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="pageNumber" type="xs:int"/>
+                            <xs:element minOccurs="0" name="pageSize" type="xs:int"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="WebSearchQuery">
+                <xs:complexContent>
+                    <xs:extension base="ax21:PagingAjaxQuery">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="queryInput" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="queryName" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="VideoSearchQuery">
+                <xs:complexContent>
+                    <xs:extension base="ax21:PagingAjaxQuery">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="queryInput" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="queryName" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="SocialSearchQuery">
+                <xs:complexContent>
+                    <xs:extension base="ax21:AjaxQuery">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="days" type="xs:int"/>
+                            <xs:element minOccurs="0" name="queryInput" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="queryName" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="ImageSearchQuery">
+                <xs:complexContent>
+                    <xs:extension base="ax21:PagingAjaxQuery">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="end" nillable="true" type="xs:date"/>
+                            <xs:element minOccurs="0" name="queryInput" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="queryName" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="start" nillable="true" type="xs:date"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="videoSearchRequest">
+        <wsdl:part name="parameters" element="ns:videoSearch"/>
+    </wsdl:message>
+    <wsdl:message name="videoSearchResponse">
+        <wsdl:part name="parameters" element="ns:videoSearchResponse"/>
+    </wsdl:message>
+    <wsdl:message name="imageSearchRequest">
+        <wsdl:part name="parameters" element="ns:imageSearch"/>
+    </wsdl:message>
+    <wsdl:message name="imageSearchResponse">
+        <wsdl:part name="parameters" element="ns:imageSearchResponse"/>
+    </wsdl:message>
+    <wsdl:message name="webSearchRequest">
+        <wsdl:part name="parameters" element="ns:webSearch"/>
+    </wsdl:message>
+    <wsdl:message name="webSearchResponse">
+        <wsdl:part name="parameters" element="ns:webSearchResponse"/>
+    </wsdl:message>
+    <wsdl:message name="socialSearchRequest">
+        <wsdl:part name="parameters" element="ns:socialSearch"/>
+    </wsdl:message>
+    <wsdl:message name="socialSearchResponse">
+        <wsdl:part name="parameters" element="ns:socialSearchResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="SimpleAjaxPortType">
+        <wsdl:operation name="videoSearch">
+            <wsdl:input message="ns:videoSearchRequest" wsaw:Action="urn:videoSearch"/>
+            <wsdl:output message="ns:videoSearchResponse" wsaw:Action="urn:videoSearchResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="imageSearch">
+            <wsdl:input message="ns:imageSearchRequest" wsaw:Action="urn:imageSearch"/>
+            <wsdl:output message="ns:imageSearchResponse" wsaw:Action="urn:imageSearchResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="webSearch">
+            <wsdl:input message="ns:webSearchRequest" wsaw:Action="urn:webSearch"/>
+            <wsdl:output message="ns:webSearchResponse" wsaw:Action="urn:webSearchResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="socialSearch">
+            <wsdl:input message="ns:socialSearchRequest" wsaw:Action="urn:socialSearch"/>
+            <wsdl:output message="ns:socialSearchResponse" wsaw:Action="urn:socialSearchResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="SimpleAjaxSoap11Binding" type="ns:SimpleAjaxPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="imageSearch">
+            <soap:operation soapAction="urn:imageSearch" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="videoSearch">
+            <soap:operation soapAction="urn:videoSearch" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="webSearch">
+            <soap:operation soapAction="urn:webSearch" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="socialSearch">
+            <soap:operation soapAction="urn:socialSearch" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="SimpleAjaxSoap12Binding" type="ns:SimpleAjaxPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="imageSearch">
+            <soap12:operation soapAction="urn:imageSearch" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="videoSearch">
+            <soap12:operation soapAction="urn:videoSearch" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="webSearch">
+            <soap12:operation soapAction="urn:webSearch" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="socialSearch">
+            <soap12:operation soapAction="urn:socialSearch" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="SimpleAjaxHttpBinding" type="ns:SimpleAjaxPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="imageSearch">
+            <http:operation location="SimpleAjax/imageSearch"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="imageSearch"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="imageSearch"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="videoSearch">
+            <http:operation location="SimpleAjax/videoSearch"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="videoSearch"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="videoSearch"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="webSearch">
+            <http:operation location="SimpleAjax/webSearch"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="webSearch"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="webSearch"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="socialSearch">
+            <http:operation location="SimpleAjax/socialSearch"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="socialSearch"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="socialSearch"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="SimpleAjax">
+        <wsdl:port name="SimpleAjaxHttpSoap11Endpoint" binding="ns:SimpleAjaxSoap11Binding">
+            <soap:address location="http://localhost:8080/Ass2-SearchAjax-WS/services/SimpleAjax.SimpleAjaxHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="SimpleAjaxHttpSoap12Endpoint" binding="ns:SimpleAjaxSoap12Binding">
+            <soap12:address location="http://localhost:8080/Ass2-SearchAjax-WS/services/SimpleAjax.SimpleAjaxHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="SimpleAjaxHttpEndpoint" binding="ns:SimpleAjaxHttpBinding">
+            <http:address location="http://localhost:8080/Ass2-SearchAjax-WS/services/SimpleAjax.SimpleAjaxHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

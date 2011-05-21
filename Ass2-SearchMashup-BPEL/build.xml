@@ -1,0 +1,33 @@
+<project name="Ass2-SearchMashup-BPEL" default="deploy" basedir=".">
+
+	<description> 
+		${ant.project.name}
+		${line.separator}
+	</description>
+
+	<property file="../../../install/deployment.properties" />
+	<import file="../../common/base-build.xml" />
+
+	<property name="version" value="1" />
+
+	<property name="sample.jar.name" value="${ant.project.name}-${version}.jar" />
+
+	<target name="deploy">
+		<echo>Deploy ${ant.project.name}</echo>
+		<jar basedir="bpelContent" destfile="${deploy.dir}/${sample.jar.name}" />
+	</target>
+
+	<target name="undeploy">
+		<echo>Undeploy ${ant.project.name}</echo>
+		<delete file="${deploy.dir}/${sample.jar.name}" />
+	</target>
+	<!--
+	<target name="sendhello">
+		<echo>Send test message to: ${ant.project.name}</echo>
+	       	<java classname="org.apache.ode.tools.sendsoap.cline.HttpSoapSender">
+	         	<arg value="http://localhost:8080/Quickstart_bpel_hello_worldWS"/>
+	         	<arg value="messages/hello_request1.xml"/>
+				<classpath refid="rs-exec-classpath"/>
+	       </java>
+	</target>  -->
+</project>

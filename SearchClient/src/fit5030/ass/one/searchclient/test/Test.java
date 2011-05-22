@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.json.JSONException;
+
 import fit5030.ass.one.searchclient.image.flickr.FlickrSearchEngine;
 import fit5030.ass.one.searchclient.image.flickr.FlickrSearchQuery;
 import fit5030.ass.one.searchclient.image.picasa.PicasaSearchEngine;
@@ -14,6 +16,8 @@ import fit5030.ass.one.searchclient.web.yahoo.YahooWebSearchQuery;
 import fit5030.ass.two.searchclient.comment.SocialSearchQuery;
 import fit5030.ass.two.searchclient.comment.twitter.*;
 import fit5030.ass.two.searchclient.webservice.Ajax;
+import fit5030.ass.two.searchclient.webservice.SimpleAjax;
+import fit5030.ass.two.searchclient.webservice.SimpleAjax.UnifiedQuery;
 import fit5030.ass.two.searchclient.webservice.Ajax.*;
 
 public class Test {
@@ -79,13 +83,28 @@ public class Test {
 		// String re=a.imageSearch(q).getContent();
 //		VideoSearchResult rr = a.videoSearch(q);
 		
-		Ajax.SocialSearchQuery q=new Ajax.SocialSearchQuery();
-		q.setQueryName("Twitter");
-		q.setDays(4);
-		q.setQueryInput("monash");
-		SocialSearchResult rr=a.socialSearch(q);
-		String re = rr.getContent();
-		System.out.println(re);
+//		Ajax.SocialSearchQuery q=new Ajax.SocialSearchQuery();
+//		q.setQueryName("Twitter");
+//		q.setDays(4);
+//		q.setQueryInput("monash");
+//		SocialSearchResult rr=a.socialSearch(q);
+//		String re = rr.getContent();
+//		System.out.println(re);
+		
+		UnifiedQuery q=new UnifiedQuery();
+		q.setTarget("Twitter");
+		q.setQ("monash");
+		q.setDays(3);
+		SimpleAjax sa=new SimpleAjax();
+		String query=q.toJSONString();
+		System.out.println(query);
+		try {
+			System.out.println(sa.unifiedSearch(query));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

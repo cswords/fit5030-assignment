@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:fit5030assignment="http://code.google.com/p/fit5030assignment/" xmlns:webservice.searchclient.two.ass.fit5030="http://webservice.searchclient.two.ass.fit5030">
+  <process name="fit5030assignment:UnifiedSearchAjax">
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="fit5030assignment:UnifiedSearchAjaxService" port="UnifiedSearchAjaxPort"/>
+    </provide>
+    <invoke partnerLink="SimpleAjax">
+      <service name="webservice.searchclient.two.ass.fit5030:SimpleAjax" port="SimpleAjaxHttpEndpoint"/>
+    </invoke>
+  </process>
+</deploy>

@@ -24,25 +24,29 @@ public class SocialSearchResult extends
 	}
 
 	public String toString() {
-		String result = "<table>\n";
+		String result = "<table class='searchresult' width='100%'>\n";
 		for (int i = 0; i < this.getDays(); i++) {
-			if (i == 0)
+			int percentage = this.trend[i] / 15;
+			if (i == 0) {
 				result += "<tr>\n"
 						+ "<td>Today: </td><td>"
 						+ ((this.trend[i] < 1500) ? this.trend[i]
 								: "very hot!(>=1500)") + "</td>\n" + "</tr>\n";
-			else if (i == 1)
+			} else if (i == 1) {
 				result += "<tr>\n"
 						+ "<td>Yesterday: </td><td>"
 						+ ((this.trend[i] < 1500) ? this.trend[i]
 								: "very hot!(>=1500)") + "</td>\n" + "</tr>\n";
-			else
+			} else {
 				result += "<tr>\n"
 						+ "<td>"
 						+ i
 						+ " days before: </td><td>"
 						+ ((this.trend[i] < 1500) ? this.trend[i]
 								: "very hot!(>=1500)") + "</td>\n" + "</tr>\n";
+			}
+			result += "<tr><td colspan='2'><div style='height:100%;width:" + percentage
+					+ "%;background-color:#525D76;'>&nbsp;</div></td></tr>";
 		}
 		result += "</table>";
 

@@ -16,12 +16,14 @@ public class FlickrSearchQuery extends AbstractQuery {
 	}
 
 	public void setMinUploadDate(Date from) {
-		this.setOption("min_upload_date",
-				(new SimpleDateFormat("yyyy/MM/dd")).format(from));
+		if (from != null)
+			this.setOption("min_upload_date", (new SimpleDateFormat(
+					"yyyy/MM/dd")).format(from));
 	}
 
 	public void setMaxUploadDate(Date to) {
-		this.setOption("max_upload_date",
-				(new SimpleDateFormat("yyyy/MM/dd")).format(to));
+		if (to != null)
+			this.setOption("max_upload_date", (new SimpleDateFormat(
+					"yyyy/MM/dd")).format(to));
 	}
 }

@@ -63,14 +63,14 @@ public class YoutubeSearchEngine extends
 						entry.setText(this.GetXmlNodeValue(n));
 					} else if (n.getNodeName() == "id") {
 						String t = "";
-						t += "<object width=\"640\" height=\"390\">";
+						t += "<object width=\"320\" height=\"240\" style='float:left'>";
 						t += "	<param name=\"movie\"";
 						t += "		value=\"http://www.youtube.com/v/****?fs=1&amp;hl=en_US\"></param>";
 						t += "	<param name=\"allowFullScreen\" value=\"true\"></param>";
 						t += "	<param name=\"allowscriptaccess\" value=\"always\"></param>";
 						t += "	<embed wmode=\"opaque\"";
 						t += "		src=\"http://www.youtube.com/v/****?fs=1&amp;hl=en_US\" type=\"application/x-shockwave-flash\"";
-						t += "		allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"128\" height=\"96\"></embed>";
+						t += "		allowscriptaccess=\"always\" allowfullscreen=\"true\" width=\"320\" height=\"240\"></embed>";
 						t += "</object>";
 						String a = this.GetXmlNodeValue(n);
 						t = t.replace("****", a.replace(

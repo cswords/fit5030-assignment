@@ -1,5 +1,6 @@
 package fit5030.ass.two.searchclient.webservice;
 
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -79,7 +80,8 @@ public class SimpleAjax {
 		}
 
 		public void setFrom(String from) throws ParseException {
-			this.from = dateFormat.parse(from);
+			if (!(from.trim().length() == 0))
+				this.from = dateFormat.parse(from);
 		}
 
 		public String getTo() {
@@ -87,7 +89,8 @@ public class SimpleAjax {
 		}
 
 		public void setTo(String to) throws ParseException {
-			this.from = dateFormat.parse(to);
+			if (!(to.trim().length() == 0))
+				this.to = dateFormat.parse(to);
 		}
 
 		public int getPageSize() {
@@ -194,8 +197,13 @@ public class SimpleAjax {
 			} catch (JSONException e) {
 			}
 			try {
-				result.setQ(jo.getString("q"));
+				String q = jo.getString("q");
+				if (q != null)
+					result.setQ(java.net.URLDecoder.decode(q, "UTF-8").replace(
+							' ', '+'));
 			} catch (JSONException e) {
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
 			}
 			try {
 				result.setTarget(jo.getString("target"));

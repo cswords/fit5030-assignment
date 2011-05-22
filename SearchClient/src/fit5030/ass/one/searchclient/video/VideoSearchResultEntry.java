@@ -43,8 +43,8 @@ public class VideoSearchResultEntry implements ISearchResultEntry {
 	}
 
 	public String toString() {
-		String result = "<td>" + this.getTitle() + "<br/>"
-				+ this.getEmbedFlashCode() + "</td>\n";
+		String result = "<td>" + this.getEmbedFlashCode() + this.getTitle()
+				+ "</td>\n";
 		return result;
 
 	}

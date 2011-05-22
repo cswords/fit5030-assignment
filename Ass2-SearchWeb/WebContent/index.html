@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./style/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link type="text/css"
+	href="./style/ui-lightness/jquery-ui-1.8.11.custom.css"
+	rel="stylesheet" />
+<script src="./script/jquery.min.js"></script>
+<script src="./script/jquery-ui.min.js"></script>
+<script type="text/javascript" src="./script/search.js"></script>
+<script>
+	var pickerOpts = {
+		dateFormat : "dd/mm/yy"
+	};
+	$(document).ready(function() {
+		$("#tabs").tabs();
+		$("#fromDate").datepicker(pickerOpts);
+		$("#toDate").datepicker(pickerOpts);
+		submitquery();
+	});
+</script>
+<title>Hello world! Good bye Monash! (Web Service, REST, SOAP,
+	BPEL, AJAX)</title>
+</head>
+<body>
+	<div id="options" style="width: 100%;"></div>
+	<table width="100%" height="700px">
+		<tr>
+			<td width="70%" valign="top">
+				<form id="listForm" onsubmit="submitquery();return false;"
+					action="#" method="post">
+					<div id="searchBar" style="width: 100%;">
+						<input type="text" name="q" value="monash" id="searchText"
+							maxlength="256" style="width: 90%" /> <a
+							onclick="$('#submit').click()">go!</a>
+					</div>
+					<div style="float: left;">
+						<a onclick="lastPage()">&lt;&lt;</a> Page Size: <input type="text"
+							name="pageSize" value="10" id="pageSize" style="width: 30px;" />
+					</div>
+					<div style="float: left;">
+						Page No.: <input type="text" name="pageNumber" value="1"
+							id="pageNumber" style="width: 30px;" /> <a onclick="nextPage();">&gt;&gt;</a>
+					</div>
+					<div style="float: left;">
+						From: <input type="text" name="from" id="fromDate"
+							style="width: 75px;" />
+					</div>
+					<div>
+						To: <input type="text" name="to" id="toDate" style="width: 75px;" />
+					</div>
+					<div style="visibility: hidden;">
+						<input id="radioGoogle" type="radio" name="target" value="Google"
+							checked="checked" /> <input id="radioYahoo" type="radio"
+							name="target" value="Yahoo" /> <input id="radioFlickr"
+							type="radio" name="target" value="Flickr" /> <input
+							id="radioYoutube" type="radio" name="target" value="Youtube" />
+					</div>
+					<div id="tabs" style="width: 95%;">
+						<ul>
+							<li><a href="#Google"
+								onclick="document.getElementById('radioGoogle').checked='checked';listquery.target='Google';$('#submit').click();"><span>Google</span>
+							</a>
+							</li>
+							<li><a href="#Yahoo"
+								onclick="document.getElementById('radioYahoo').checked='checked';listquery.target='Yahoo';$('#submit').click();"><span>Yahoo</span>
+							</a>
+							</li>
+							<li><a href="#Flickr"
+								onclick="document.getElementById('radioFlickr').checked='checked';listquery.target='Flickr';$('#submit').click();"><span>Flickr</span>
+							</a>
+							</li>
+							<li><a href="#Youtube"
+								onclick="document.getElementById('radioYoutube').checked='checked';listquery.target='Youtube';$('#submit').click();"><span>Youtube</span>
+							</a>
+							</li>
+						</ul>
+						<div id="Google" style="width: 100%;">Searching on Google...</div>
+						<div id="Yahoo" style="width: 100%;">Searching on Yahoo...</div>
+						<div id="Flickr" style="width: 100%;">Searching on Flickr...</div>
+						<div id="Youtube" style="width: 100%;">Searching on
+							Youtube...</div>
+					</div>
+					<input id="submit" type="submit" style="visibility: hidden" />
+				</form></td>
+			<td width="30%" valign="top">
+				<div id="Twitter"
+					class="ui-tabs ui-widget ui-widget-content ui-corner-all">Searching
+					on Twitter...</div>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -4,7 +4,8 @@
 	targetNamespace="http://code.google.com/p/fit5030assignment/"
 	suppressJoinFailure="yes" xmlns:tns="http://code.google.com/p/fit5030assignment/"
 	xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
-	xmlns:ns="http://webservice.searchclient.two.ass.fit5030">
+	xmlns:ns="http://webservice.searchclient.two.ass.fit5030" xmlns:xsd="http://code.google.com/p/fit5030assignment/type"
+	xmlns:xsdt="http://webservice.searchclient.two.ass.fit5030/xsd">
 
 	<!-- Import the client WSDL -->
 	<bpel:import namespace="http://webservice.searchclient.two.ass.fit5030"
@@ -20,8 +21,8 @@
 		<!-- The 'client' role represents the requester of this service. -->
 		<bpel:partnerLink name="client" partnerLinkType="tns:UnifiedSearchAjax"
 			myRole="UnifiedSearchAjaxProvider" />
-		<bpel:partnerLink name="SimpleAjax" partnerLinkType="tns:SimpleAjaxType"
-			partnerRole="SimpleAjaxRole"></bpel:partnerLink>
+		
+        <bpel:partnerLink name="SimpleAjaxLink" partnerLinkType="tns:SimpleAjaxType" partnerRole="qurier"></bpel:partnerLink>
 	</bpel:partnerLinks>
 
 	<!-- ================================================================= -->
@@ -36,91 +37,234 @@
 		<!-- Reference to the message that will be returned to the requester -->
 		<bpel:variable name="output"
 			messageType="tns:UnifiedSearchAjaxResponseMessage" />
-		<bpel:variable name="SimpleAjaxResponse" messageType="ns:unifiedSearchResponse"></bpel:variable>
-		<bpel:variable name="SimpleAjaxRequest" messageType="ns:unifiedSearchRequest"></bpel:variable>
-	</bpel:variables>
+
+
+		<bpel:variable name="ImageSearchResponse" messageType="ns:imageSearchResponse"></bpel:variable>
+		<bpel:variable name="WebSearchResponse" messageType="ns:webSearchResponse"></bpel:variable>
+		<bpel:variable name="VideoSearchResponse" messageType="ns:videoSearchResponse"></bpel:variable>
+		<bpel:variable name="SocialSearchResponse" messageType="ns:socialSearchResponse"></bpel:variable>
+		<bpel:variable name="ImageSearchRequest" messageType="ns:imageSearchRequest"></bpel:variable>
+		<bpel:variable name="WebSearchRequest" messageType="ns:webSearchRequest"></bpel:variable>
+		<bpel:variable name="VideoSearchRequest" messageType="ns:videoSearchRequest"></bpel:variable>
+		<bpel:variable name="SocialSearchRequest" messageType="ns:socialSearchRequest"></bpel:variable>
+        
+        
+        
+        
+    </bpel:variables>
 
 	<!-- ================================================================= -->
 	<!-- ORCHESTRATION LOGIC -->
 	<!-- Set of activities coordinating the flow of messages across the -->
 	<!-- services integrated within this business process -->
-	<!-- ================================================================= -->
-	<bpel:sequence name="main">
-
-		<!-- Receive input from requester. Note: This maps to operation defined 
+	<!-- ================================================================= -->
+    <bpel:sequence name="main">
+        <!-- Receive input from requester. Note: This maps to operation defined 
 			in UnifiedSearchAjax.wsdl -->
-		<bpel:receive name="receiveInput" partnerLink="client"
-			portType="tns:UnifiedSearchAjax" operation="process" variable="input"
-			createInstance="yes" />
+        
+        
+        <bpel:receive name="receiveInput" partnerLink="client" createInstance="yes" operation="process" portType="tns:UnifiedSearchAjax"/>
 
 		<!-- Generate reply to synchronous request -->
-		<bpel:assign validate="no" name="AssignInput">
-
-			<bpel:copy>
-				<bpel:from>
-					<bpel:literal xml:space="preserve"><ns:unifiedSearch
-						xmlns:ns="http://webservice.searchclient.two.ass.fit5030">
-<ns:jsonStr>
-<![CDATA[{"days":3,"q":"shit","target":"Twitter","pageSize":0,"pageNumber":0}]]>
-</ns:jsonStr>
-</ns:unifiedSearch></bpel:literal>
-				</bpel:from>
-				<bpel:to part="parameters" variable="SimpleAjaxRequest"></bpel:to>
-			</bpel:copy>
-			<bpel:copy>
-				<bpel:from part="payload" variable="input">
-					<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:input]]></bpel:query>
-				</bpel:from>
-				<bpel:to part="parameters" variable="SimpleAjaxRequest">
-					<bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:jsonStr]]></bpel:query>
-				</bpel:to>
-			</bpel:copy>
-		</bpel:assign>
-		
-        <bpel:assign validate="no" name="AssignOutput1">
-            <bpel:copy>
-                <bpel:from><bpel:literal><tns:UnifiedSearchAjaxResponse xmlns:tns="http://code.google.com/p/fit5030assignment/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <tns:result>tns:result</tns:result>
-</tns:UnifiedSearchAjaxResponse>
-</bpel:literal></bpel:from>
-                <bpel:to variable="output" part="payload"></bpel:to>
-            </bpel:copy>
-            
-            <bpel:copy>
-                <bpel:from part="parameters" variable="SimpleAjaxRequest">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:jsonStr]]></bpel:query>
-                </bpel:from>
-                <bpel:to part="payload" variable="output">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
-                </bpel:to>
-            </bpel:copy>
-        </bpel:assign>
-        <bpel:invoke name="Invoke" partnerLink="SimpleAjax" operation="unifiedSearch" portType="ns:SimpleAjaxPortType" inputVariable="SimpleAjaxRequest" outputVariable="SimpleAjaxResponse"></bpel:invoke>
-        <bpel:reply name="replyOutput" 
-               partnerLink="client"
-               portType="tns:UnifiedSearchAjax"
-               operation="process" 
-               variable="output"
-               />
-               
-        <bpel:assign validate="no" name="AssignOutput"><bpel:copy>
-                <bpel:from><bpel:literal><tns:UnifiedSearchAjaxResponse xmlns:tns="http://code.google.com/p/fit5030assignment/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <tns:result>tns:result</tns:result>
-</tns:UnifiedSearchAjaxResponse>
-</bpel:literal></bpel:from>
-                <bpel:to variable="output" part="payload"></bpel:to>
-            </bpel:copy><bpel:copy>
-                <bpel:from part="parameters" variable="SimpleAjaxResponse">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:return]]></bpel:query>
-                </bpel:from>
-                <bpel:to part="payload" variable="output">
-                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
-                </bpel:to>
-            </bpel:copy>
         
         
+        <bpel:sequence name="Sequence">
+                
+            <bpel:if name="If">
+                <bpel:condition><![CDATA[true()]]></bpel:condition>
+                <bpel:sequence>
+                    
+                    <bpel:assign validate="no" name="AssignWeb">
+                        <bpel:copy>
+                            <bpel:from part="payload" variable="input">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                    <![CDATA[tns:input/xsd:pageSize]]>
+                                </bpel:query>
+                            </bpel:from>
+                            <bpel:to part="parameters" variable="WebSearchRequest">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                    <![CDATA[ns:query/xsdt:pageSize]]>
+                                </bpel:query>
+                            </bpel:to>
+                        </bpel:copy>
+                        <bpel:copy>
+                            <bpel:from part="payload" variable="input">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:input/xsd:pageNumber]]></bpel:query>
+                            </bpel:from>
+                            <bpel:to part="parameters" variable="WebSearchRequest">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:query/xsdt:pageNumber]]></bpel:query>
+                            </bpel:to>
+                        </bpel:copy>
+                        <bpel:copy>
+                            <bpel:from part="payload" variable="input">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:input/xsd:queryName]]></bpel:query>
+                            </bpel:from>
+                            <bpel:to part="parameters" variable="WebSearchRequest">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:query/xsdt:queryName]]></bpel:query>
+                            </bpel:to>
+                        </bpel:copy>
+                        
+                    </bpel:assign>
+                    <bpel:invoke name="InvokeWeb" partnerLink="SimpleAjaxLink" operation="webSearch" portType="ns:SimpleAjaxPortType" inputVariable="WebSearchRequest" outputVariable="WebSearchResponse"></bpel:invoke>
+                    
+                
+                    <bpel:assign validate="no" name="AssignOutputWeb">
+                        <bpel:copy>
+                            <bpel:from part="parameters" variable="WebSearchResponse"></bpel:from>
+                            <bpel:to part="payload" variable="output">
+                                <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                            </bpel:to>
+                        </bpel:copy>
+                    </bpel:assign>
+                    <bpel:reply name="ReplyOutput" partnerLink="client" operation="process" portType="tns:UnifiedSearchAjax"></bpel:reply>
+                    
+                    
+                </bpel:sequence>
+                <bpel:elseif>
+                    <bpel:condition><![CDATA[true()]]></bpel:condition>
+                    <bpel:sequence>
+                        
+                        <bpel:assign validate="no" name="AssignVideo">
+                            <bpel:copy>
+                                <bpel:from part="payload" variable="input">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[tns:input/xsd:pageSize]]>
+                                    </bpel:query>
+                                </bpel:from>
+                                <bpel:to part="parameters" variable="VideoSearchRequest">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[ns:query/xsdt:pageSize]]>
+                                    </bpel:query>
+                                </bpel:to>
+                            </bpel:copy>
+                            <bpel:copy>
+                                <bpel:from part="payload" variable="input">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[tns:input/xsd:pageNumber]]>
+                                    </bpel:query>
+                                </bpel:from>
+                                <bpel:to part="parameters" variable="VideoSearchRequest">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:query/xsdt:pageNumber]]></bpel:query>
+                                </bpel:to>
+                            </bpel:copy>
+                            
+                            <bpel:copy>
+                                <bpel:from part="payload" variable="input">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:input/xsd:queryName]]></bpel:query>
+                                </bpel:from>
+                                <bpel:to part="parameters" variable="VideoSearchRequest">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[ns:query/xsdt:queryName]]>
+                                    </bpel:query>
+                                </bpel:to>
+                            </bpel:copy>
+                        </bpel:assign>
+                        <bpel:invoke name="InvokeVideo" partnerLink="SimpleAjaxLink" operation="videoSearch" portType="ns:SimpleAjaxPortType" inputVariable="VideoSearchRequest" outputVariable="VideoSearchResponse"></bpel:invoke>
+                        <bpel:assign validate="no" name="AssignOutputVideo">
+                            <bpel:copy>
+                                <bpel:from part="parameters" variable="VideoSearchResponse">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:return]]></bpel:query>
+                                </bpel:from>
+                                <bpel:to part="payload" variable="output">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                </bpel:to>
+                            </bpel:copy>
+                        </bpel:assign>
+                        <bpel:reply name="ReplyOutput" partnerLink="client" operation="process" portType="tns:UnifiedSearchAjax"></bpel:reply>
+                        
+                        
+                    </bpel:sequence>
+                </bpel:elseif><bpel:elseif>
+                    <bpel:condition><![CDATA[true()]]></bpel:condition>
+                    <bpel:sequence>
+                        <bpel:assign validate="no" name="AssignImage">
+                            <bpel:copy>
+                                <bpel:from part="payload" variable="input">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[tns:input/xsd:queryName]]>
+                                    </bpel:query>
+                                </bpel:from>
+                                <bpel:to part="parameters" variable="ImageSearchRequest">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[ns:query/xsdt:queryName]]>
+                                    </bpel:query>
+                                </bpel:to>
+                            </bpel:copy>
+                            
+                            <bpel:copy>
+                                <bpel:from part="payload" variable="input">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[tns:input/xsd:pageSize]]>
+                                    </bpel:query>
+                                </bpel:from>
+                                <bpel:to part="parameters" variable="ImageSearchRequest">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[ns:query/xsdt:pageSize]]>
+                                    </bpel:query>
+                                </bpel:to>
+                            </bpel:copy>
+                            <bpel:copy>
+                                <bpel:from part="payload" variable="input">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[tns:input/xsd:pageNumber]]>
+                                    </bpel:query>
+                                </bpel:from>
+                                <bpel:to part="parameters" variable="ImageSearchRequest">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                                        <![CDATA[ns:query/xsdt:pageNumber]]>
+                                    </bpel:query>
+                                </bpel:to>
+                            </bpel:copy>
+                        </bpel:assign>
+                        <bpel:invoke name="InvokeImage" partnerLink="SimpleAjaxLink" operation="imageSearch" portType="ns:SimpleAjaxPortType" inputVariable="ImageSearchRequest" outputVariable="ImageSearchResponse"></bpel:invoke>
+                        <bpel:assign validate="no" name="AssignOutputImage">
+                            <bpel:copy>
+                                <bpel:from part="parameters" variable="ImageSearchResponse">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:return]]></bpel:query>
+                                </bpel:from>
+                                <bpel:to part="payload" variable="output">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                </bpel:to>
+                            </bpel:copy>
+                        </bpel:assign>
+                        <bpel:reply name="ReplyOutput" partnerLink="client" operation="process" portType="tns:UnifiedSearchAjax"></bpel:reply>
+                    </bpel:sequence>
+                </bpel:elseif><bpel:elseif>
+                    <bpel:condition><![CDATA[true()]]></bpel:condition>
+                    <bpel:sequence>
+                        <bpel:assign validate="no" name="AssignSocial">
+                            
+                            <bpel:copy>
+                                <bpel:from part="payload" variable="input">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:input/xsd:queryName]]></bpel:query>
+                                </bpel:from>
+                                <bpel:to part="parameters" variable="SocialSearchRequest">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:query/xsdt:queryName]]></bpel:query>
+                                </bpel:to>
+                            </bpel:copy>
+                            
+                            
+                        </bpel:assign>
+                        <bpel:invoke name="InvokeSocial" partnerLink="SimpleAjaxLink" operation="socialSearch" portType="ns:SimpleAjaxPortType" inputVariable="SocialSearchRequest" outputVariable="SocialSearchResponse"></bpel:invoke>
+                        <bpel:assign validate="no" name="AssignOutputSocial">
+                            <bpel:copy>
+                                <bpel:from part="parameters" variable="SocialSearchResponse">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[ns:return]]></bpel:query>
+                                </bpel:from>
+                                <bpel:to part="payload" variable="output">
+                                    <bpel:query queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[tns:result]]></bpel:query>
+                                </bpel:to>
+                            </bpel:copy>
+                        </bpel:assign>
+                        <bpel:reply name="ReplyOutput" partnerLink="client" operation="process" portType="tns:UnifiedSearchAjax"></bpel:reply>
+                        
+                    </bpel:sequence>
+                </bpel:elseif></bpel:if>
+   
+        </bpel:sequence>
+  
         
-        </bpel:assign>
+ 
     </bpel:sequence>
 </bpel:process>
 

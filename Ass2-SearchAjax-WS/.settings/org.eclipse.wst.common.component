@@ -6,6 +6,9 @@
         <dependent-module archiveName="Ass1-SearchClient.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/SearchClient/SearchClient">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="org.json.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/org.json/org.json">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="Ass2-SearchAjax-WS"/>
         <property name="java-output-path" value="/Ass2-SearchAjax-WS/build/classes"/>
     </wb-module>

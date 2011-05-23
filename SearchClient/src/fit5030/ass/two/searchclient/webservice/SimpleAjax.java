@@ -13,20 +13,36 @@ import fit5030.ass.two.searchclient.webservice.Ajax.*;
 public class SimpleAjax {
 	private Ajax ajax = new Ajax();
 
-	public String webSearch(WebSearchQuery query) {
-		return ajax.webSearch(query).getContent();
+	public String webSearch(UnifiedQuery query) {
+		WebSearchQuery q = query.toWebSearchQuery();
+		if (q != null)
+			return ajax.webSearch(q).getContent();
+		else
+			return "Not supported";
 	}
 
-	public String imageSearch(ImageSearchQuery query) {
-		return ajax.imageSearch(query).getContent();
+	public String imageSearch(UnifiedQuery query) {
+		ImageSearchQuery q = query.toImageSearchQuery();
+		if (q != null)
+			return ajax.imageSearch(q).getContent();
+		else
+			return "Not supported";
 	}
 
-	public String videoSearch(VideoSearchQuery query) {
-		return ajax.videoSearch(query).getContent();
+	public String videoSearch(UnifiedQuery query) {
+		VideoSearchQuery q = query.toVideoSearchQuery();
+		if (q != null)
+			return ajax.videoSearch(q).getContent();
+		else
+			return "Not supported";
 	}
 
-	public String socialSearch(SocialSearchQuery query) {
-		return ajax.socialSearch(query).getContent();
+	public String socialSearch(UnifiedQuery query) {
+		SocialSearchQuery q = query.toSocialSearchQuery();
+		if (q != null)
+			return ajax.socialSearch(q).getContent();
+		else
+			return "Not supported";
 	}
 
 	public String unifiedSearch(String jsonStr) throws JSONException,
@@ -34,16 +50,16 @@ public class SimpleAjax {
 		UnifiedQuery q = UnifiedQuery.parseUnifiedQuery(jsonStr);
 		WebSearchQuery wsq = q.toWebSearchQuery();
 		if (wsq != null)
-			return this.webSearch(wsq);
+			return ajax.webSearch(wsq).getContent();
 		ImageSearchQuery isq = q.toImageSearchQuery();
 		if (isq != null)
-			return this.imageSearch(isq);
+			return ajax.imageSearch(isq).getContent();
 		VideoSearchQuery vsq = q.toVideoSearchQuery();
 		if (vsq != null)
-			return this.videoSearch(vsq);
+			return ajax.videoSearch(vsq).getContent();
 		SocialSearchQuery ssq = q.toSocialSearchQuery();
 		if (ssq != null)
-			return this.socialSearch(ssq);
+			return ajax.socialSearch(ssq).getContent();
 		return "Your query is not supported.";
 	}
 

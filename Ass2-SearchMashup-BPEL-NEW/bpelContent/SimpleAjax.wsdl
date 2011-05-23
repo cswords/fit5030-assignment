@@ -23,7 +23,7 @@
             <xs:element name="webSearch">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element minOccurs="0" name="query" nillable="true" type="ax22:WebSearchQuery"/>
+                        <xs:element minOccurs="0" name="query" nillable="true" type="ax22:UnifiedQuery"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -37,7 +37,7 @@
             <xs:element name="videoSearch">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element minOccurs="0" name="query" nillable="true" type="ax22:VideoSearchQuery"/>
+                        <xs:element minOccurs="0" name="query" nillable="true" type="ax22:UnifiedQuery"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -84,7 +84,7 @@
             <xs:element name="socialSearch">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element minOccurs="0" name="query" nillable="true" type="ax22:SocialSearchQuery"/>
+                        <xs:element minOccurs="0" name="query" nillable="true" type="ax22:UnifiedQuery"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -98,7 +98,7 @@
             <xs:element name="imageSearch">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element minOccurs="0" name="query" nillable="true" type="ax22:ImageSearchQuery"/>
+                        <xs:element minOccurs="0" name="query" nillable="true" type="ax22:UnifiedQuery"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -111,64 +111,16 @@
             </xs:element>
         </xs:schema>
         <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://webservice.searchclient.two.ass.fit5030/xsd">
-            <xs:complexType name="AjaxQuery">
+            <xs:complexType name="UnifiedQuery">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="format" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="queryName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="days" type="xs:int"/>
+                    <xs:element minOccurs="0" name="from" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="pageNumber" type="xs:int"/>
+                    <xs:element minOccurs="0" name="pageSize" type="xs:int"/>
+                    <xs:element minOccurs="0" name="q" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="target" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="to" nillable="true" type="xs:string"/>
                 </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="PagingAjaxQuery">
-                <xs:complexContent>
-                    <xs:extension base="ax21:AjaxQuery">
-                        <xs:sequence>
-                            <xs:element minOccurs="0" name="pageNumber" type="xs:int"/>
-                            <xs:element minOccurs="0" name="pageSize" type="xs:int"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="WebSearchQuery">
-                <xs:complexContent>
-                    <xs:extension base="ax21:PagingAjaxQuery">
-                        <xs:sequence>
-                            <xs:element minOccurs="0" name="queryInput" nillable="true" type="xs:string"/>
-                            <xs:element minOccurs="0" name="queryName" nillable="true" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="VideoSearchQuery">
-                <xs:complexContent>
-                    <xs:extension base="ax21:PagingAjaxQuery">
-                        <xs:sequence>
-                            <xs:element minOccurs="0" name="queryInput" nillable="true" type="xs:string"/>
-                            <xs:element minOccurs="0" name="queryName" nillable="true" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="SocialSearchQuery">
-                <xs:complexContent>
-                    <xs:extension base="ax21:AjaxQuery">
-                        <xs:sequence>
-                            <xs:element minOccurs="0" name="days" type="xs:int"/>
-                            <xs:element minOccurs="0" name="queryInput" nillable="true" type="xs:string"/>
-                            <xs:element minOccurs="0" name="queryName" nillable="true" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="ImageSearchQuery">
-                <xs:complexContent>
-                    <xs:extension base="ax21:PagingAjaxQuery">
-                        <xs:sequence>
-                            <xs:element minOccurs="0" name="end" nillable="true" type="xs:date"/>
-                            <xs:element minOccurs="0" name="queryInput" nillable="true" type="xs:string"/>
-                            <xs:element minOccurs="0" name="queryName" nillable="true" type="xs:string"/>
-                            <xs:element minOccurs="0" name="start" nillable="true" type="xs:date"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
             </xs:complexType>
         </xs:schema>
         <xs:schema xmlns:ax24="http://webservice.searchclient.two.ass.fit5030" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://json.org/xsd">

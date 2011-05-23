@@ -1,33 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://code.google.com/p/fit5030assignment/" xmlns:type="http://code.google.com/p/fit5030assignment/type" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:wsdl="http://webservice.searchclient.two.ass.fit5030" name="UnifiedSearchAjax" targetNamespace="http://code.google.com/p/fit5030assignment/">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://code.google.com/p/fit5030assignment/"
+	xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:wsdl="http://webservice.searchclient.two.ass.fit5030"
+	xmlns:xsdt="http://webservice.searchclient.two.ass.fit5030/xsd" name="UnifiedSearchAjax"
+	targetNamespace="http://code.google.com/p/fit5030assignment/">
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 		TYPE DEFINITION - List of types participating in this BPEL process The BPEL 
 		Designer will generate default request and response types but you can define 
 		or import any XML Schema type and use them as part of the message types. 
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-    <plnk:partnerLinkType name="SimpleAjaxType">
-    <plnk:role name="qurier" portType="wsdl:SimpleAjaxPortType"/>
-  </plnk:partnerLinkType>
-    <import location="SimpleAjax.wsdl" namespace="http://webservice.searchclient.two.ass.fit5030"/>
-    <types>
-		<schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://code.google.com/p/fit5030assignment/type">
-				<complexType name="inputType">
-					<sequence>
-						<element name="target" type="string"/>
-						<element name="format" type="string"/>
-						<element name="queryName" type="string"/>
-						<element name="pageSize" type="int"/>
-						<element name="pageNumber" type="int"/>
-					</sequence>
-				</complexType>
-		</schema>
-		<schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://code.google.com/p/fit5030assignment/">
-			<import namespace="http://code.google.com/p/fit5030assignment/type"/>
+	<plnk:partnerLinkType name="SimpleAjaxType">
+		<plnk:role name="qurier" portType="wsdl:SimpleAjaxPortType" />
+	</plnk:partnerLinkType>
+	<import location="SimpleAjax.wsdl"
+		namespace="http://webservice.searchclient.two.ass.fit5030" />
+	<types>
+		<xs:schema attributeFormDefault="qualified"
+			elementFormDefault="qualified"
+			targetNamespace="http://webservice.searchclient.two.ass.fit5030/xsd">
+			<xs:complexType name="UnifiedQuery">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="days" type="xs:int" />
+					<xs:element minOccurs="0" name="from" nillable="true"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="pageNumber" type="xs:int" />
+					<xs:element minOccurs="0" name="pageSize" type="xs:int" />
+					<xs:element minOccurs="0" name="q" nillable="true" type="xs:string" />
+					<xs:element minOccurs="0" name="target" nillable="true"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="to" nillable="true"
+						type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema"
+			attributeFormDefault="unqualified" elementFormDefault="qualified"
+			xmlns:xsd="http://webservice.searchclient.two.ass.fit5030/xsd"
+			targetNamespace="http://code.google.com/p/fit5030assignment/">
+			<import namespace="http://webservice.searchclient.two.ass.fit5030/xsd" />
 			<element name="UnifiedSearchAjaxRequest">
 				<complexType>
 					<sequence>
-						<element name="input" type="type:inputType"/>
+						<element name="input" type="xsd:UnifiedQuery" />
 					</sequence>
 				</complexType>
 			</element>
@@ -35,7 +51,7 @@
 			<element name="UnifiedSearchAjaxResponse">
 				<complexType>
 					<sequence>
-						<element name="result" type="string"/>
+						<element name="result" type="string" />
 					</sequence>
 				</complexType>
 			</element>
@@ -47,10 +63,10 @@
 		MESSAGE TYPE DEFINITION - Definition of the message types used as part of 
 		the port type defintions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<message name="UnifiedSearchAjaxRequestMessage">
-		<part element="tns:UnifiedSearchAjaxRequest" name="payload"/>
+		<part element="tns:UnifiedSearchAjaxRequest" name="payload" />
 	</message>
 	<message name="UnifiedSearchAjaxResponseMessage">
-		<part element="tns:UnifiedSearchAjaxResponse" name="payload"/>
+		<part element="tns:UnifiedSearchAjaxResponse" name="payload" />
 	</message>
 
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
@@ -60,14 +76,14 @@
 	<!-- portType implemented by the UnifiedSearchAjax BPEL process -->
 	<portType name="UnifiedSearchAjax">
 		<operation name="process">
-			<input message="tns:UnifiedSearchAjaxRequestMessage"/>
-			<output message="tns:UnifiedSearchAjaxResponseMessage"/>
+			<input message="tns:UnifiedSearchAjaxRequestMessage" />
+			<output message="tns:UnifiedSearchAjaxResponseMessage" />
 		</operation>
 	</portType>
 	<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 		PARTNER LINK TYPE DEFINITION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<plnk:partnerLinkType name="UnifiedSearchAjax">
-		<plnk:role name="UnifiedSearchAjaxProvider" portType="tns:UnifiedSearchAjax"/>
+		<plnk:role name="UnifiedSearchAjaxProvider" portType="tns:UnifiedSearchAjax" />
 	</plnk:partnerLinkType>
 
 
@@ -75,14 +91,15 @@
 		BINDING DEFINITION - Defines the message format and protocol details for 
 		a web service. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<binding name="UnifiedSearchAjaxBinding" type="tns:UnifiedSearchAjax">
-		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
 		<operation name="process">
-			<soap:operation soapAction="http://code.google.com/p/fit5030assignment//process"/>
+			<soap:operation soapAction="http://code.google.com/p/fit5030assignment//process" />
 			<input>
-				<soap:body use="literal"/>
+				<soap:body use="literal" />
 			</input>
 			<output>
-				<soap:body use="literal"/>
+				<soap:body use="literal" />
 			</output>
 		</operation>
 	</binding>
@@ -92,7 +109,7 @@
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 	<service name="UnifiedSearchAjaxService">
 		<port binding="tns:UnifiedSearchAjaxBinding" name="UnifiedSearchAjaxPort">
-			<soap:address location="http://localhost:8080/ode/processes/UnifiedSearchAjax"/>
+			<soap:address location="http://localhost:8080/ode/processes/UnifiedSearchAjax" />
 		</port>
 	</service>
 </definitions>

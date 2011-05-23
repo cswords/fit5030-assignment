@@ -10,15 +10,11 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import fit5030.ass.two.searchclient.webservice.SimpleAjax;
 import org.apache.axis2.AxisFault;
 import org.json.JSONException;
-
-import fit5030.ass.two.searchclient.webservice.JSONExceptionException;
-import fit5030.ass.two.searchclient.webservice.ParseExceptionException;
-import fit5030.ass.two.searchclient.webservice.SimpleAjax;
-import fit5030.ass.two.searchclient.webservice.SimpleAjaxStub;
-import fit5030.ass.two.searchclient.webservice.SimpleAjaxStub.UnifiedSearch;
-import fit5030.ass.two.searchclient.webservice.SimpleAjaxStub.UnifiedSearchResponse;
+import com.google.code.p.fit5030assignment.UnifiedSearchAjaxServiceStub;
+import com.google.code.p.fit5030assignment.UnifiedSearchAjaxServiceStub.*;
 
 /**
  * Servlet implementation class Search
@@ -43,7 +39,7 @@ public class Search extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		query = request.getParameter("query");
-		this.doResponse(response);
+		this.doResponseWS(response);
 	}
 
 	/**
@@ -53,30 +49,23 @@ public class Search extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		query = request.getParameter("query");
-		this.doResponse(response);
+		this.doResponseWS(response);
 	}
 
-	@SuppressWarnings("unused")
+	UnifiedSearchAjaxResponse response;
+
 	private void doResponseWS(HttpServletResponse response) {
 		if (query == null)
 			return;
-		SimpleAjaxStub stub;
 		try {
-			stub = new SimpleAjaxStub();
-			UnifiedSearch search = new UnifiedSearch();
-			search.setJsonStr(this.query);
-			UnifiedSearchResponse resp = stub.unifiedSearch(search);
-			ServletOutputStream out = response.getOutputStream();
-			out.print(resp.get_return());
+			UnifiedSearchAjaxServiceStub stub = new UnifiedSearchAjaxServiceStub();
+			UnifiedSearchAjaxRequest req = new UnifiedSearchAjaxRequest();
+			req.setInput(query);
+			this.response = stub.process(req);
+			doResponse(response);
 		} catch (AxisFault e) {
 			e.printStackTrace();
 		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParseExceptionException e) {
-			e.printStackTrace();
-		} catch (JSONExceptionException e) {
 			e.printStackTrace();
 		}
 	}

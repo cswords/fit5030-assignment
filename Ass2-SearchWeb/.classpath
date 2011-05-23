@@ -15,5 +15,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Ass2-SearchClient"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.json"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/axis2"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

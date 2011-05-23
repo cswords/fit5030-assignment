@@ -72,7 +72,7 @@
 
 
 			<bpel:if name="If">
-				<bpel:condition><![CDATA[true()]]></bpel:condition>
+				<bpel:condition><![CDATA[$input.payload/tns:input/tns:target="Google" or $input.payload/tns:input/tns:target="Yahoo"  ]]></bpel:condition>
 				<bpel:sequence>
 
 
@@ -177,7 +177,7 @@
 
 				</bpel:sequence>
 				<bpel:elseif>
-					<bpel:condition><![CDATA[true()]]></bpel:condition>
+					<bpel:condition><![CDATA[$input.payload/tns:input/tns:target="Youtube"]]></bpel:condition>
 					<bpel:sequence>
 
 
@@ -283,7 +283,7 @@
 					</bpel:sequence>
 				</bpel:elseif>
 				<bpel:elseif>
-					<bpel:condition><![CDATA[true()]]></bpel:condition>
+					<bpel:condition><![CDATA[$input.payload/tns:input/tns:target="Flickr"]]></bpel:condition>
 					<bpel:sequence>
 
                         <bpel:assign validate="no" name="AssignInputImage">
@@ -388,7 +388,7 @@
 					</bpel:sequence>
 				</bpel:elseif>
 				<bpel:elseif>
-					<bpel:condition><![CDATA[true()]]></bpel:condition>
+					<bpel:condition><![CDATA[$input.payload/tns:input/tns:target="Twitter"]]></bpel:condition>
 					<bpel:sequence>
 
                         <bpel:assign validate="no" name="AssignInputSocial">

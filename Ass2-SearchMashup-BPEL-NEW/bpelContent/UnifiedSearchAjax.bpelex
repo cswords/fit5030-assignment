@@ -18,7 +18,7 @@
   </extensions>
   <extensions>
     <extendedObject href="UnifiedSearchAjax.bpel#/"/>
-    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ProcessExtension" modificationStamp="1306125673000"/>
+    <extensionObject xsi:type="org.eclipse.bpel.ui.uiextensionmodel:ProcessExtension" modificationStamp="1306129945000"/>
   </extensions>
   <extensions>
     <extendedObject href="UnifiedSearchAjax.bpel#//@activity/@activities.1/@activities.0"/>

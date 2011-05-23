@@ -17,10 +17,11 @@
 	<import location="SimpleAjax.wsdl"
 		namespace="http://webservice.searchclient.two.ass.fit5030" />
 	<types>
-		<xs:schema attributeFormDefault="qualified"
-			elementFormDefault="qualified"
-			targetNamespace="http://webservice.searchclient.two.ass.fit5030/xsd">
-			<xs:complexType name="UnifiedQuery">
+		<schema xmlns="http://www.w3.org/2001/XMLSchema"
+			xmlns:xsdt="http://webservice.searchclient.two.ass.fit5030/xsd"
+			attributeFormDefault="unqualified" elementFormDefault="qualified"
+			targetNamespace="http://code.google.com/p/fit5030assignment/">
+			<xs:complexType name="BpelUnifiedQuery">
 				<xs:sequence>
 					<xs:element minOccurs="0" name="days" type="xs:int" />
 					<xs:element minOccurs="0" name="from" nillable="true"
@@ -34,16 +35,10 @@
 						type="xs:string" />
 				</xs:sequence>
 			</xs:complexType>
-		</xs:schema>
-		<schema xmlns="http://www.w3.org/2001/XMLSchema"
-			attributeFormDefault="unqualified" elementFormDefault="qualified"
-			xmlns:xsd="http://webservice.searchclient.two.ass.fit5030/xsd"
-			targetNamespace="http://code.google.com/p/fit5030assignment/">
-			<import namespace="http://webservice.searchclient.two.ass.fit5030/xsd" />
 			<element name="UnifiedSearchAjaxRequest">
 				<complexType>
 					<sequence>
-						<element name="input" type="xsd:UnifiedQuery" />
+						<element name="input" type="tns:BpelUnifiedQuery" />
 					</sequence>
 				</complexType>
 			</element>

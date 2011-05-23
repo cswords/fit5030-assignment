@@ -17,7 +17,7 @@ import fit5030.ass.two.searchclient.comment.SocialSearchQuery;
 import fit5030.ass.two.searchclient.comment.twitter.*;
 import fit5030.ass.two.searchclient.webservice.Ajax;
 import fit5030.ass.two.searchclient.webservice.SimpleAjax;
-import fit5030.ass.two.searchclient.webservice.SimpleAjax.UnifiedQuery;
+import fit5030.ass.two.searchclient.webservice.UnifiedQuery;
 import fit5030.ass.two.searchclient.webservice.Ajax.*;
 
 public class Test {

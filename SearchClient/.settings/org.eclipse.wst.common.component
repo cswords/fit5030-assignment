@@ -5,5 +5,8 @@
         <dependent-module archiveName="Ass1-SearchClient-GUI.war" deploy-path="/" handle="module:/resource/Ass1-SearchClient-GUI/Ass1-SearchClient-GUI">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="org.json.jar" deploy-path="/" handle="module:/resource/org.json/org.json">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>

@@ -5,8 +5,8 @@ import fit5030.ass.one.searchclient.base.AbstractQuery;
 public class GoogleWebSearchQuery extends AbstractQuery {
 
 	public GoogleWebSearchQuery() {
-		this.setOption("key", "AIzaSyDU9Sl7Bq2494UEqAEXdsJN3cM2qtUWthg");
-		this.setOption("cx", "017576662512468239146:omuauf_lfve");
+		this.setOption("key", "AIzaSyD2c6QpxMauz_Bj_CbC0vLM_Fia5r86fb0");
+		this.setOption("cx", "016673009104692472454:i8uofzr7dam");
 		this.setOption("alt", "atom");
 	}
 
